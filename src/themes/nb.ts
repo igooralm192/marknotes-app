@@ -63,6 +63,16 @@ export const nbTheme = extendTheme({
     body: 'Quicksand',
     mono: 'Quicksand',
   },
+  fontSizes: {
+    xl: 36, // Header
+    lg: 20, // Subtitle
+    md: 14, // Body
+    sm: 12, // Label
+    xs: 12, // Footnote
+  },
+  config: {
+    initialColorMode: 'dark',
+  },
 })
 
 type NbThemeType = typeof nbTheme
