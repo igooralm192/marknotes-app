@@ -57,11 +57,31 @@ describe('HomeScreen', () => {
     const screen = renderWithProviders(<HomeScreen />)
 
     const notesList = screen.getByTestId('notes-list')
-    expect(notesList).not.toHaveProp('data', [])
-    expect(store.getState().notes.ids.length).toBe(1)
+    expect(notesList.props.data).toHaveLength(1)
 
     fireEvent.press(screen.getByTestId('note-any_id-delete-button'))
-    expect(notesList).toHaveProp('data', [])
-    expect(store.getState().notes.ids.length).toBe(0)
+    expect(notesList.props.data).toHaveLength(0)
+  })
+
+  it('should filter notes in list', async () => {
+    store.dispatch(
+      noteAdded({
+        id: 'any_id2',
+        title: 'any_title2',
+        content: 'any_content2',
+        date: new Date(),
+      }),
+    )
+
+    const screen = renderWithProviders(<HomeScreen />)
+
+    const notesList = screen.getByTestId('notes-list')
+    expect(notesList.props.data).toHaveLength(2)
+
+    fireEvent.changeText(screen.getByTestId('search-notes-input'), 'any_title2')
+
+    const notesListItem = await screen.findByTestId('notes-list-item-any_id2')
+    expect(notesList).toContainElement(notesListItem)
+    expect(notesList.props.data).toHaveLength(1)
   })
 })

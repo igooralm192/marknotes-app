@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import { ListRenderItem } from 'react-native'
 
 import { NotesListItem } from '@/components/notes'
@@ -22,6 +22,12 @@ const HomeScreen: React.FC = () => {
   const navigation = useNavigation()
 
   const notes = useSelector(selectAllNotes)
+  const [searchText, setSearchText] = useState('')
+
+  const filteredNotesByText = useMemo(
+    () => notes.filter(note => note.title.includes(searchText)),
+    [notes, searchText],
+  )
 
   const navigateToCreateNote = () => {
     navigation.navigate('CreateNoteScreen')
@@ -47,11 +53,13 @@ const HomeScreen: React.FC = () => {
 
       <SearchInput
         placeholder="Pesquise suas notas!"
+        onChangeText={setSearchText}
         InputLeftElement={<SearchIcon />}
+        testID="search-notes-input"
       />
 
       <NotesList
-        data={notes}
+        data={filteredNotesByText}
         keyExtractor={item => item.id}
         renderItem={renderNotesListItem}
         testID="notes-list"
