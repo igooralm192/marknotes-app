@@ -9,7 +9,13 @@ export const Container = styled(Box, {
   p: 4,
   width: '100%',
   borderRadius: 16,
-  bg: 'card.500',
+  bg: {
+    linearGradient: {
+      colors: ['card.500', 'card.700'],
+      start: [0, 0],
+      end: [0, 1],
+    },
+  },
 })
 
 export const Title = styled(UI.Typography, {

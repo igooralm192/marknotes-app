@@ -14,6 +14,7 @@ export const nbTheme = extendTheme({
     },
     card: {
       500: '#3A384F',
+      700: '#232230',
     },
     divider: {
       500: '#EAEAEA',
