@@ -1,5 +1,7 @@
 import { NativeBaseProvider } from 'native-base'
 import React from 'react'
+import { render } from '@testing-library/react-native'
+
 import { nbTheme } from '@/themes'
 
 export const ThemeProvider: React.FC = ({ children }) => {
@@ -13,4 +15,12 @@ export const ThemeProvider: React.FC = ({ children }) => {
       {children}
     </NativeBaseProvider>
   )
+}
+
+export const Providers: React.FC = ({ children }) => {
+  return <ThemeProvider>{children}</ThemeProvider>
+}
+
+export const renderWithProviders = (Component: React.ReactElement) => {
+  return render(Component, { wrapper: Providers })
 }

@@ -1,10 +1,11 @@
+import { IBoxProps } from 'native-base'
 import React, { memo } from 'react'
 
 import { Note } from '@/types'
 
 import { Container, Title, Content, DeleteButton, DeleteIcon } from './styles'
 
-export interface NotesListItemProps extends Note {
+export interface NotesListItemProps extends IBoxProps, Note {
   onDeleteNote: (noteId: string) => void
 }
 
@@ -13,16 +14,17 @@ const NotesListItem: React.FC<NotesListItemProps> = ({
   title,
   content,
   onDeleteNote,
+  ...props
 }) => {
   return (
-    <Container>
+    <Container {...props}>
       <Title>{title}</Title>
 
       <Content>{content}</Content>
 
       <DeleteButton
-        onPress={() => onDeleteNote(id)}
         icon={<DeleteIcon />}
+        onPress={() => onDeleteNote(id)}
         testID="delete-note-button"
       />
     </Container>
