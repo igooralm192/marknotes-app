@@ -3,10 +3,10 @@ import React from 'react'
 
 import { TypographyProps, TypographyVariant } from './types'
 
-type NbFontSizes = keyof Theme['fontSizes']
-type NbFontWeights = keyof Theme['fontWeights']
+type NBFontSizes = keyof Theme['fontSizes']
+type NBFontWeights = keyof Theme['fontWeights']
 
-const nbFontSizesMap: Record<TypographyVariant, NbFontSizes> = {
+const nbFontSizesMap: Record<TypographyVariant, NBFontSizes> = {
   header: 'xl',
   subtitle: 'lg',
   body: 'md',
@@ -14,7 +14,7 @@ const nbFontSizesMap: Record<TypographyVariant, NbFontSizes> = {
   footnote: 'xs',
 }
 
-const nbFontWeightsMap: Record<TypographyVariant, NbFontWeights> = {
+const nbFontWeightsMap: Record<TypographyVariant, NBFontWeights> = {
   header: 'bold',
   subtitle: 'bold',
   body: 'normal',
