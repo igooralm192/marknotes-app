@@ -25,7 +25,7 @@ const NotesListItem: React.FC<NotesListItemProps> = ({
       <DeleteButton
         icon={<DeleteIcon />}
         onPress={() => onDeleteNote(id)}
-        testID="delete-note-button"
+        testID={`note-${id}-delete-button`}
       />
     </Container>
   )

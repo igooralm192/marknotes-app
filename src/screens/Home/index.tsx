@@ -1,7 +1,10 @@
+import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { ListRenderItem } from 'react-native'
 
 import { NotesListItem } from '@/components/notes'
+import { useDispatch, useSelector } from '@/store'
+import { noteRemoved, selectAllNotes } from '@/store/notes'
 import { Note } from '@/types'
 
 import {
@@ -13,16 +16,20 @@ import {
   AddButton,
   AddIcon,
 } from './styles'
-import { useNavigation } from '@react-navigation/native'
 
 const HomeScreen: React.FC = () => {
+  const dispatch = useDispatch()
   const navigation = useNavigation()
+
+  const notes = useSelector(selectAllNotes)
 
   const navigateToCreateNote = () => {
     navigation.navigate('CreateNoteScreen')
   }
 
-  const handleDeleteNote = (_noteId: string) => {}
+  const handleDeleteNote = (noteId: string) => {
+    dispatch(noteRemoved(noteId))
+  }
 
   const renderNotesListItem: ListRenderItem<Note> = ({ item }) => {
     return (
@@ -44,15 +51,7 @@ const HomeScreen: React.FC = () => {
       />
 
       <NotesList
-        data={[
-          {
-            id: 'any_id',
-            title: 'Coisas para fazer',
-            content:
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-            date: new Date(),
-          },
-        ]}
+        data={notes}
         keyExtractor={item => item.id}
         renderItem={renderNotesListItem}
         testID="notes-list"

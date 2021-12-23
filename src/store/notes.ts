@@ -11,12 +11,13 @@ const notesSlice = createSlice({
   reducers: {
     noteAdded: notesAdapter.addOne,
     noteRemoved: notesAdapter.removeOne,
+    cleanNotes: notesAdapter.removeAll,
   },
 })
 
 export const { selectAll: selectAllNotes } =
   notesAdapter.getSelectors<AppState>(state => state.notes)
 
-export const { noteAdded, noteRemoved } = notesSlice.actions
+export const { noteAdded, noteRemoved, cleanNotes } = notesSlice.actions
 
 export default notesSlice.reducer
