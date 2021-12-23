@@ -1,7 +1,7 @@
 module.exports = {
   preset: 'react-native',
   clearMocks: true,
-  setupFiles: ['./jest/setup.ts'],
+  setupFilesAfterEnv: ['./jest/setup.ts'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '\\.snap$'],
   transformIgnorePatterns: [
