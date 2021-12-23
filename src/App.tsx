@@ -1,10 +1,13 @@
 import { NativeBaseProvider } from 'native-base'
 import React from 'react'
+import { Provider as StoreProvider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
 
 import Routes from './routes'
+import store, { persistor } from './store'
 import { nbTheme } from './themes'
 
-const config = {
+const nbConfig = {
   dependencies: {
     'linear-gradient': require('react-native-linear-gradient').default,
   },
@@ -12,9 +15,13 @@ const config = {
 
 const App = () => {
   return (
-    <NativeBaseProvider config={config} theme={nbTheme}>
-      <Routes />
-    </NativeBaseProvider>
+    <StoreProvider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <NativeBaseProvider config={nbConfig} theme={nbTheme}>
+          <Routes />
+        </NativeBaseProvider>
+      </PersistGate>
+    </StoreProvider>
   )
 }
 export default App
