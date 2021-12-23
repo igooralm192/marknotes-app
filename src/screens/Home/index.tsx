@@ -1,15 +1,50 @@
-import { Column } from 'native-base'
 import React from 'react'
+import { ListRenderItem } from 'react-native'
 
-import * as UI from '@/components/ui'
+import {
+  Container,
+  Title,
+  SearchInput,
+  SearchIcon,
+  NotesList,
+  AddButton,
+  AddIcon,
+} from './styles'
+import { INoteItem } from './types'
+import NoteItem from './NoteItem'
 
 export interface HomeScreenProps {}
 
 const HomeScreen: React.FC<HomeScreenProps> = () => {
+  const renderNoteItem: ListRenderItem<INoteItem> = ({ item }) => {
+    return <NoteItem {...item} />
+  }
+
   return (
-    <Column bg="background.500" flex={1} padding={6}>
-      <UI.Typography variant="header">Notas</UI.Typography>
-    </Column>
+    <Container>
+      <Title>Notas</Title>
+
+      <SearchInput
+        placeholder="Pesquise suas notas!"
+        InputLeftElement={<SearchIcon />}
+      />
+
+      <NotesList
+        data={[
+          {
+            id: 'any_string',
+            title: 'Coisas para fazer',
+            content:
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+            date: new Date(),
+          },
+        ]}
+        keyExtractor={item => item.id}
+        renderItem={renderNoteItem}
+      />
+
+      <AddButton icon={<AddIcon />} />
+    </Container>
   )
 }
 
