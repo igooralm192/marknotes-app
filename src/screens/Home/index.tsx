@@ -1,6 +1,9 @@
 import React from 'react'
 import { ListRenderItem } from 'react-native'
 
+import { NotesListItem } from '@/components/notes'
+import { Note } from '@/types'
+
 import {
   Container,
   Title,
@@ -10,14 +13,10 @@ import {
   AddButton,
   AddIcon,
 } from './styles'
-import { INoteItem } from './types'
-import NoteItem from './NoteItem'
 
-export interface HomeScreenProps {}
-
-const HomeScreen: React.FC<HomeScreenProps> = () => {
-  const renderNoteItem: ListRenderItem<INoteItem> = ({ item }) => {
-    return <NoteItem {...item} />
+const HomeScreen: React.FC = () => {
+  const renderNotesListItem: ListRenderItem<Note> = ({ item }) => {
+    return <NotesListItem {...item} />
   }
 
   return (
@@ -40,7 +39,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
           },
         ]}
         keyExtractor={item => item.id}
-        renderItem={renderNoteItem}
+        renderItem={renderNotesListItem}
       />
 
       <AddButton icon={<AddIcon />} />

@@ -1,6 +1,5 @@
 import {
   Box,
-  Fab,
   FlatList,
   SearchIcon as NBSearchIcon,
   AddIcon as NBAddIcon,
@@ -9,7 +8,7 @@ import { FlatListProps } from 'react-native'
 
 import * as UI from '@/components/ui'
 import { styled } from '@/utils'
-import { INoteItem } from './types'
+import { Note } from '@/types'
 
 export const Container = styled(Box, {
   px: 6,
@@ -37,7 +36,7 @@ export const SearchInput = styled(UI.Input, {
   bg: 'card.500:alpha.50',
 })
 
-export const NotesList = styled<FlatListProps<INoteItem>>(FlatList, {
+export const NotesList = styled<FlatListProps<Note>>(FlatList, {
   style: {
     marginTop: 16,
     marginHorizontal: -24,
@@ -48,11 +47,7 @@ export const NotesList = styled<FlatListProps<INoteItem>>(FlatList, {
   },
 })
 
-export const AddButton = styled(Fab, {
-  right: 6,
-  bottom: 12,
-  bg: 'primary.500',
-})
+export const AddButton = styled(UI.FAB)
 
 export const AddIcon = styled(NBAddIcon, {
   size: 'sm',
