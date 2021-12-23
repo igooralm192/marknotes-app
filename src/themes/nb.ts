@@ -12,6 +12,9 @@ export const nbTheme = extendTheme({
     background: {
       500: '#21202C',
     },
+    card: {
+      500: '#3A384F',
+    },
     divider: {
       500: '#EAEAEA',
     },
@@ -75,8 +78,8 @@ export const nbTheme = extendTheme({
   },
 })
 
-type NbThemeType = typeof nbTheme
+type NBThemeType = typeof nbTheme
 
 declare module 'native-base' {
-  interface ICustomTheme extends NbThemeType {}
+  interface ICustomTheme extends NBThemeType {}
 }
