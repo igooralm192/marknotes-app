@@ -1,10 +1,15 @@
-import { NavigationContainer } from '@react-navigation/native'
+import {
+  NavigationContainer,
+  NavigationProp,
+  useNavigation as useReactNavigation,
+} from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
 
 import { HomeScreen, AddNoteScreen } from '@/screens'
+import { RouteStackParamList } from './types'
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator<RouteStackParamList>()
 
 const Routes: React.FC = () => {
   return (
@@ -20,5 +25,8 @@ const Routes: React.FC = () => {
     </NavigationContainer>
   )
 }
+
+export const useNavigation = () =>
+  useReactNavigation<NavigationProp<RouteStackParamList>>()
 
 export default Routes
