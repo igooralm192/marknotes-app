@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { useToast } from 'native-base'
-import React from 'react'
+import React, { useState } from 'react'
 
 import { useNavigation } from '@/routes'
 import { RouteStackParamList } from '@/routes/types'
@@ -13,6 +13,8 @@ import {
   TitleInput,
   DateText,
   ContentInput,
+  SaveButton,
+  SaveIcon,
   DeleteButton,
   DeleteIcon,
 } from './styles'
@@ -29,20 +31,44 @@ const EditNoteScreen: React.FC<EditNoteScreenProps> = ({ route }) => {
 
   const note = useSelector(state => selectNoteById(state, noteId))
 
-  const handleNoteChange = (key: 'title' | 'content') => (text: string) => {
+  const [title, setTitle] = useState(note?.title ?? '')
+  const [content, setContent] = useState(note?.content ?? '')
+
+  const handleSaveNote = () => {
     if (!note) {
+      return
+    }
+
+    if (title.trim().length === 0) {
+      toast.show({
+        title: 'Sua nota precisa de um título!',
+        placement: 'bottom',
+        status: 'error',
+      })
+
       return
     }
 
     dispatch(
       noteChanged({
         ...note,
-        [key]: text,
+        title,
+        content,
       }),
     )
+
+    toast.show({
+      title: 'Nota atualizada com sucesso!',
+      placement: 'bottom',
+      status: 'success',
+    })
   }
 
   const handleDeleteNote = () => {
+    if (!note) {
+      return
+    }
+
     dispatch(noteRemoved(noteId))
 
     toast.show({
@@ -62,8 +88,8 @@ const EditNoteScreen: React.FC<EditNoteScreenProps> = ({ route }) => {
     <Container keyboardVerticalOffset={-200} behavior="padding">
       <TitleInput
         placeholder="Título"
-        value={note.title}
-        onChangeText={handleNoteChange('title')}
+        value={title}
+        onChangeText={setTitle}
         testID="edit-note-title-input"
       />
 
@@ -72,16 +98,22 @@ const EditNoteScreen: React.FC<EditNoteScreenProps> = ({ route }) => {
       <ContentInput
         placeholder="Digite alguma coisa..."
         textAlignVertical="top"
-        value={note.content}
-        onChangeText={handleNoteChange('content')}
+        value={content}
+        onChangeText={setContent}
         testID="edit-note-content-input"
         multiline
       />
 
       <DeleteButton
-        onPress={handleDeleteNote}
         icon={<DeleteIcon />}
+        onPress={handleDeleteNote}
         testID="edit-note-delete-button"
+      />
+
+      <SaveButton
+        icon={<SaveIcon />}
+        onPress={handleSaveNote}
+        testID="edit-note-save-button"
       />
     </Container>
   )

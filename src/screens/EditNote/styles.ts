@@ -1,4 +1,4 @@
-import { CloseIcon, KeyboardAvoidingView } from 'native-base'
+import { CheckIcon, CloseIcon, KeyboardAvoidingView } from 'native-base'
 
 import * as UI from '@/components/ui'
 import { styled } from '@/utils'
@@ -22,7 +22,10 @@ export const TitleInput = styled(EditNoteInput, {
   fontWeight: 'bold',
 })
 
-export const DateText = styled(UI.Typography)
+export const DateText = styled(UI.Typography, {
+  variant: 'label',
+  color: 'grey.500',
+})
 
 export const ContentInput = styled(EditNoteInput, {
   mt: 4,
@@ -31,9 +34,19 @@ export const ContentInput = styled(EditNoteInput, {
   fontWeight: 500,
 })
 
+export const SaveButton = styled(UI.FAB, {
+  colorScheme: 'success',
+})
+
+export const SaveIcon = styled(CheckIcon, {
+  size: 'sm',
+})
+
 export const DeleteButton = styled(UI.FAB, {
+  bottom: 32,
   colorScheme: 'error',
 })
+
 export const DeleteIcon = styled(CloseIcon, {
   size: 'sm',
 })
