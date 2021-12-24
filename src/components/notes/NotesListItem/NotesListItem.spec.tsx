@@ -35,7 +35,7 @@ describe('HomeScreen', () => {
       },
     )
 
-    fireEvent.press(screen.getByTestId('delete-note-button'))
+    fireEvent.press(screen.getByTestId(`note-${note.id}-delete-button`))
     expect(onDeleteNoteMock).toHaveBeenCalledWith(note.id)
   })
 })
