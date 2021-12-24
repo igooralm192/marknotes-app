@@ -21,4 +21,6 @@ jest.mock('redux-persist', () => {
   }
 })
 
+jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper')
+
 export {}
