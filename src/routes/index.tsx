@@ -6,7 +6,7 @@ import {
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
 
-import { HomeScreen, AddNoteScreen } from '@/screens'
+import { HomeScreen, AddNoteScreen, EditNoteScreen } from '@/screens'
 import { RouteStackParamList } from './types'
 
 const Stack = createNativeStackNavigator<RouteStackParamList>()
@@ -19,6 +19,11 @@ const Routes: React.FC = () => {
         <Stack.Screen
           name="AddNoteScreen"
           component={AddNoteScreen}
+          options={{ presentation: 'modal' }}
+        />
+        <Stack.Screen
+          name="EditNoteScreen"
+          component={EditNoteScreen}
           options={{ presentation: 'modal' }}
         />
       </Stack.Navigator>
