@@ -1,3 +1,4 @@
+import { StackActions } from '@react-navigation/native'
 import { useToast } from 'native-base'
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
@@ -51,7 +52,7 @@ const AddNoteScreen: React.FC<AddNoteScreenProps> = () => {
       status: 'success',
     })
 
-    navigation.goBack()
+    navigation.dispatch(StackActions.replace('EditNoteScreen', { noteId: id }))
   }
 
   return (

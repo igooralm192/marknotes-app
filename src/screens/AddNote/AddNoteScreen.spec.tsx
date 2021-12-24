@@ -10,13 +10,13 @@ import AddNoteScreen from '.'
 const note = mockNote()
 
 describe('AddNoteScreen', () => {
-  const goBackMock = jest.fn()
+  const dispatchMock = jest.fn()
 
   beforeAll(() => {
     store.dispatch(cleanNotes())
 
     mocked(useNavigation).mockImplementation(() => ({
-      goBack: goBackMock,
+      dispatch: dispatchMock,
     }))
   })
 
@@ -35,7 +35,14 @@ describe('AddNoteScreen', () => {
 
     expect(selectAllNotes(store.getState())).toHaveLength(1)
     expect(screen.queryByText('Nota adicionada com sucesso!')).toBeTruthy()
-    expect(goBackMock).toBeCalledTimes(1)
+    expect(dispatchMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        payload: expect.objectContaining({
+          name: 'EditNoteScreen',
+          params: { noteId: expect.any(String) },
+        }),
+      }),
+    )
   })
 
   it('should show error message when try add note without title', async () => {
