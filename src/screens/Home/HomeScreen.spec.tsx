@@ -5,21 +5,15 @@ import React from 'react'
 
 import store from '@/store'
 import { cleanNotes, noteAdded } from '@/store/notes'
-import { renderWithProviders } from '@/utils'
+import { mockNote, renderWithProviders } from '@/utils'
 import HomeScreen from '.'
+
+const note = mockNote()
 
 describe('HomeScreen', () => {
   beforeEach(() => {
     store.dispatch(cleanNotes())
-
-    store.dispatch(
-      noteAdded({
-        id: 'any_id',
-        title: 'any_title',
-        content: 'any_content',
-        date: new Date(),
-      }),
-    )
+    store.dispatch(noteAdded(note))
   })
 
   it('should renders correctly', () => {
@@ -32,7 +26,7 @@ describe('HomeScreen', () => {
     const screen = renderWithProviders(<HomeScreen />)
 
     const notesList = screen.getByTestId('notes-list')
-    const notesListItem = screen.queryByTestId(`notes-list-item-${'any_id'}`)
+    const notesListItem = screen.queryByTestId(`notes-list-item-${note.id}`)
 
     expect(notesList).toContainElement(notesListItem)
   })
@@ -59,29 +53,30 @@ describe('HomeScreen', () => {
     const notesList = screen.getByTestId('notes-list')
     expect(notesList.props.data).toHaveLength(1)
 
-    fireEvent.press(screen.getByTestId('note-any_id-delete-button'))
+    fireEvent.press(screen.getByTestId(`note-${note.id}-delete-button`))
     expect(notesList.props.data).toHaveLength(0)
   })
 
   it('should filter notes in list', async () => {
-    store.dispatch(
-      noteAdded({
-        id: 'any_id2',
-        title: 'any_title2',
-        content: 'any_content2',
-        date: new Date(),
-      }),
-    )
+    const otherNote = mockNote()
+    store.dispatch(noteAdded(otherNote))
 
     const screen = renderWithProviders(<HomeScreen />)
 
     const notesList = screen.getByTestId('notes-list')
     expect(notesList.props.data).toHaveLength(2)
 
-    fireEvent.changeText(screen.getByTestId('search-notes-input'), 'any_title2')
+    fireEvent.changeText(
+      screen.getByTestId('search-notes-input'),
+      otherNote.title,
+    )
 
-    const notesListItem = await screen.findByTestId('notes-list-item-any_id2')
+    const notesListItem = await screen.findByTestId(
+      `notes-list-item-${otherNote.id}`,
+    )
     expect(notesList).toContainElement(notesListItem)
-    expect(notesList.props.data).toHaveLength(1)
+    expect(notesList.props.data).toHaveLength(
+      Number(note.title.includes(otherNote.title)) + 1,
+    )
   })
 })

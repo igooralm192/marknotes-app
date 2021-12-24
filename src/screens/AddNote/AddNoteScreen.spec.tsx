@@ -1,21 +1,14 @@
 import { useNavigation } from '@react-navigation/native'
 import { fireEvent } from '@testing-library/react-native'
-import faker from 'faker'
 import { mocked } from 'jest-mock'
 import React from 'react'
 
 import store from '@/store'
 import { cleanNotes, selectAllNotes } from '@/store/notes'
-import { Note } from '@/types'
-import { renderWithProviders } from '@/utils'
+import { mockNote, renderWithProviders } from '@/utils'
 import AddNoteScreen from '.'
 
-const noteMock: Partial<Note> = {
-  id: faker.datatype.uuid(),
-  title: faker.random.words(),
-  content: faker.random.words(),
-  date: faker.datatype.datetime(),
-}
+const note = mockNote()
 
 describe('AddNoteScreen', () => {
   const goBackMock = jest.fn()
@@ -34,8 +27,8 @@ describe('AddNoteScreen', () => {
     const titleInput = await screen.findByTestId('add-note-title-input')
     const contentInput = await screen.findByTestId('add-note-content-input')
 
-    fireEvent.changeText(titleInput, noteMock.title)
-    fireEvent.changeText(contentInput, noteMock.content)
+    fireEvent.changeText(titleInput, note.title)
+    fireEvent.changeText(contentInput, note.content)
 
     jest.useFakeTimers()
 

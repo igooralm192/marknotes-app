@@ -1,17 +1,10 @@
 import { fireEvent, render } from '@testing-library/react-native'
 import React from 'react'
 
-import { Note } from '@/types'
-import { ThemeProvider } from '@/utils'
+import { mockNote, ThemeProvider } from '@/utils'
 import NotesListItem from '.'
 
-const note: Note = {
-  id: 'any_id',
-  title: 'any_title',
-  content: 'any_content',
-  date: new Date(),
-}
-
+const note = mockNote()
 const onDeleteNoteMock = jest.fn()
 
 describe('HomeScreen', () => {
