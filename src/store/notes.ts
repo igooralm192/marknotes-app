@@ -12,12 +12,13 @@ const notesSlice = createSlice({
   initialState: notesAdapter.getInitialState(),
   reducers: {
     noteAdded: notesAdapter.addOne,
+    noteChanged: notesAdapter.setOne,
     noteRemoved: notesAdapter.removeOne,
     cleanNotes: notesAdapter.removeAll,
   },
 })
 
-export const { selectAll: selectAllNotes } =
+export const { selectAll: selectAllNotes, selectById: selectNoteById } =
   notesAdapter.getSelectors<AppState>(state => state.notes)
 
 const noteTitleIncludesText = (text: string) => (note: Note) =>
@@ -26,6 +27,7 @@ const noteTitleIncludesText = (text: string) => (note: Note) =>
 export const selectAllNotesByTitle = (text: string) => (state: AppState) =>
   selectAllNotes(state).filter(noteTitleIncludesText(text))
 
-export const { noteAdded, noteRemoved, cleanNotes } = notesSlice.actions
+export const { noteAdded, noteChanged, noteRemoved, cleanNotes } =
+  notesSlice.actions
 
 export default notesSlice.reducer
