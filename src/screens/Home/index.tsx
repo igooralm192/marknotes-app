@@ -1,10 +1,10 @@
 import { useNavigation } from '@react-navigation/native'
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import { ListRenderItem } from 'react-native'
 
 import { NotesListItem } from '@/components/notes'
 import { useDispatch, useSelector } from '@/store'
-import { noteRemoved, selectAllNotes } from '@/store/notes'
+import { noteRemoved, selectAllNotesByTitle } from '@/store/notes'
 import { Note } from '@/types'
 
 import {
@@ -21,16 +21,9 @@ const HomeScreen: React.FC = () => {
   const dispatch = useDispatch()
   const navigation = useNavigation()
 
-  const notes = useSelector(selectAllNotes)
   const [searchText, setSearchText] = useState('')
 
-  const filteredNotesByText = useMemo(
-    () =>
-      notes.filter(note =>
-        note.title.toLowerCase().includes(searchText.toLowerCase().trim()),
-      ),
-    [notes, searchText],
-  )
+  const notes = useSelector(selectAllNotesByTitle(searchText))
 
   const navigateToCreateNote = () => {
     navigation.navigate('AddNoteScreen')
@@ -62,7 +55,7 @@ const HomeScreen: React.FC = () => {
       />
 
       <NotesList
-        data={filteredNotesByText}
+        data={notes}
         keyExtractor={item => item.id}
         renderItem={renderNotesListItem}
         testID="notes-list"
