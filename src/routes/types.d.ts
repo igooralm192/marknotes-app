@@ -4,7 +4,7 @@ declare global {
   namespace ReactNavigation {
     interface RootParamList {
       HomeScreen: undefined
-      CreateNoteScreen: undefined
+      AddNoteScreen: undefined
     }
   }
 }
