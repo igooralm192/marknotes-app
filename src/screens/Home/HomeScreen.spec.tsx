@@ -10,9 +10,15 @@ import HomeScreen from '.'
 const note = mockNote()
 
 describe('HomeScreen', () => {
+  const navigateMock = jest.fn()
+
   beforeEach(() => {
     store.dispatch(cleanNotes())
     store.dispatch(noteAdded(note))
+
+    mocked(useNavigation).mockImplementation(() => ({
+      navigate: navigateMock,
+    }))
   })
 
   it('should renders correctly', () => {
@@ -30,14 +36,7 @@ describe('HomeScreen', () => {
     expect(notesList).toContainElement(notesListItem)
   })
 
-  it('should navigate to CreateNoteScreen when press add button', () => {
-    const useNavigationMocked = mocked(useNavigation)
-    const navigateMock = jest.fn()
-
-    useNavigationMocked.mockImplementationOnce(() => ({
-      navigate: navigateMock,
-    }))
-
+  it('should navigate to AddNoteScreen when press add button', () => {
     const screen = renderWithProviders(HomeScreen)
 
     const addButton = screen.getByTestId('add-note-button')
@@ -77,5 +76,16 @@ describe('HomeScreen', () => {
     expect(notesList.props.data).toHaveLength(
       Number(note.title.includes(otherNote.title)) + 1,
     )
+  })
+
+  it('should navigate to EditNoteScreen when press on note list item', () => {
+    const screen = renderWithProviders(HomeScreen)
+
+    const notesListItem = screen.getByTestId(`notes-list-item-${note.id}`)
+    fireEvent.press(notesListItem)
+
+    expect(navigateMock).toHaveBeenCalledWith('EditNoteScreen', {
+      noteId: note.id,
+    })
   })
 })

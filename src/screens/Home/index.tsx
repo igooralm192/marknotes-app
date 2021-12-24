@@ -25,9 +25,9 @@ const HomeScreen: React.FC = () => {
 
   const notes = useSelector(selectAllNotesByTitle(searchText))
 
-  const navigateToCreateNote = () => {
-    navigation.navigate('AddNoteScreen')
-  }
+  const navigateToAddNote = () => navigation.navigate('AddNoteScreen')
+  const navigateToEditNote = (noteId: string) =>
+    navigation.navigate('EditNoteScreen', { noteId })
 
   const handleDeleteNote = (noteId: string) => {
     dispatch(noteRemoved(noteId))
@@ -37,6 +37,7 @@ const HomeScreen: React.FC = () => {
     return (
       <NotesListItem
         {...item}
+        onPress={() => navigateToEditNote(item.id)}
         onDeleteNote={handleDeleteNote}
         testID={`notes-list-item-${item.id}`}
       />
@@ -63,7 +64,7 @@ const HomeScreen: React.FC = () => {
 
       <AddButton
         icon={<AddIcon />}
-        onPress={navigateToCreateNote}
+        onPress={navigateToAddNote}
         testID="add-note-button"
       />
     </Container>
