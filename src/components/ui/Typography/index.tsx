@@ -7,16 +7,20 @@ type NBFontSizes = keyof Theme['fontSizes']
 type NBFontWeights = keyof Theme['fontWeights']
 
 const nbFontSizesMap: Record<TypographyVariant, NBFontSizes> = {
-  header: 'xl',
-  subtitle: 'lg',
+  h1: '3xl',
+  h2: '2xl',
+  subtitle1: 'xl',
+  subtitle2: 'lg',
   body: 'md',
   label: 'sm',
   footnote: 'xs',
 }
 
 const nbFontWeightsMap: Record<TypographyVariant, NBFontWeights> = {
-  header: 'bold',
-  subtitle: 'bold',
+  h1: 'bold',
+  h2: 'bold',
+  subtitle1: 'bold',
+  subtitle2: 'normal',
   body: 'normal',
   label: 'bold',
   footnote: 'light',

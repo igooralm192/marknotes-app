@@ -68,8 +68,10 @@ export const nbTheme = extendTheme({
     mono: 'Quicksand',
   },
   fontSizes: {
-    xl: 36, // Header
-    lg: 20, // Subtitle
+    '3xl': 32, // Header 1
+    '2xl': 24, // Header 2
+    xl: 20, // Subtitle 1
+    lg: 16, // Subtitle 2
     md: 14, // Body
     sm: 12, // Label
     xs: 12, // Footnote

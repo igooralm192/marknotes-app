@@ -1,8 +1,10 @@
 import { ITextProps } from 'native-base'
 
 export type TypographyVariant =
-  | 'header'
-  | 'subtitle'
+  | 'h1'
+  | 'h2'
+  | 'subtitle1'
+  | 'subtitle2'
   | 'body'
   | 'footnote'
   | 'label'

@@ -19,7 +19,7 @@ export const Container = styled(Box, {
 })
 
 export const Title = styled(UI.Typography, {
-  variant: 'subtitle',
+  variant: 'subtitle1',
 })
 
 export const Content = styled(UI.Typography, {

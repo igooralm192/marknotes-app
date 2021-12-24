@@ -19,7 +19,7 @@ export const Container = styled(Box, {
 })
 
 export const Title = styled(UI.Typography, {
-  variant: 'header',
+  variant: 'h1',
 })
 
 export const SearchIcon = styled(NBSearchIcon, {
