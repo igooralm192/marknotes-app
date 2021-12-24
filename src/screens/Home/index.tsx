@@ -25,12 +25,15 @@ const HomeScreen: React.FC = () => {
   const [searchText, setSearchText] = useState('')
 
   const filteredNotesByText = useMemo(
-    () => notes.filter(note => note.title.includes(searchText)),
+    () =>
+      notes.filter(note =>
+        note.title.toLowerCase().includes(searchText.toLowerCase().trim()),
+      ),
     [notes, searchText],
   )
 
   const navigateToCreateNote = () => {
-    navigation.navigate('CreateNoteScreen')
+    navigation.navigate('AddNoteScreen')
   }
 
   const handleDeleteNote = (noteId: string) => {

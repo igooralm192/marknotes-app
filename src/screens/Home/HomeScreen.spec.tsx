@@ -25,7 +25,7 @@ describe('HomeScreen', () => {
   it('should renders correctly', () => {
     const screen = renderWithProviders(<HomeScreen />)
 
-    expect(screen.getByText('Notas')).toBeDefined()
+    expect(screen.getByText('Notas')).toBeTruthy()
   })
 
   it('should render notes list and contains one note', () => {
@@ -50,7 +50,7 @@ describe('HomeScreen', () => {
     const addButton = screen.getByTestId('add-note-button')
     fireEvent.press(addButton)
 
-    expect(navigateMock).toHaveBeenCalledWith('CreateNoteScreen')
+    expect(navigateMock).toHaveBeenCalledWith('AddNoteScreen')
   })
 
   it('should render notes list and remove one note from screen', () => {
