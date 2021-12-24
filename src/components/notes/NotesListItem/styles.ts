@@ -1,9 +1,11 @@
-import { Box, CloseIcon, IconButton } from 'native-base'
+import { Box, CloseIcon, IconButton, Pressable } from 'native-base'
 
 import * as UI from '@/components/ui'
 import { styled } from '@/utils'
 
-export const Container = styled(Box, {
+export const Container = styled(Pressable)
+
+export const Card = styled(Box, {
   position: 'relative',
   my: 4,
   p: 4,

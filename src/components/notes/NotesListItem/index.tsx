@@ -1,11 +1,18 @@
-import { IBoxProps } from 'native-base'
+import { IPressableProps } from 'native-base'
 import React, { memo } from 'react'
 
 import { Note } from '@/types'
 
-import { Container, Title, Content, DeleteButton, DeleteIcon } from './styles'
+import {
+  Container,
+  Card,
+  Title,
+  Content,
+  DeleteButton,
+  DeleteIcon,
+} from './styles'
 
-export interface NotesListItemProps extends IBoxProps, Note {
+export interface NotesListItemProps extends IPressableProps, Note {
   onDeleteNote: (noteId: string) => void
 }
 
@@ -18,15 +25,17 @@ const NotesListItem: React.FC<NotesListItemProps> = ({
 }) => {
   return (
     <Container {...props}>
-      <Title>{title}</Title>
+      <Card>
+        <Title>{title}</Title>
 
-      <Content>{content}</Content>
+        <Content>{content}</Content>
 
-      <DeleteButton
-        icon={<DeleteIcon />}
-        onPress={() => onDeleteNote(id)}
-        testID={`note-${id}-delete-button`}
-      />
+        <DeleteButton
+          icon={<DeleteIcon />}
+          onPress={() => onDeleteNote(id)}
+          testID={`note-${id}-delete-button`}
+        />
+      </Card>
     </Container>
   )
 }
