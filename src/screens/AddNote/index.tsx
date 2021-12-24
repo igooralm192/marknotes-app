@@ -1,8 +1,8 @@
-import { useNavigation } from '@react-navigation/native'
 import { useToast } from 'native-base'
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
+import { useNavigation } from '@/routes'
 import { useDispatch } from '@/store'
 import { noteAdded } from '@/store/notes'
 import {
@@ -61,6 +61,7 @@ const AddNoteScreen: React.FC<AddNoteScreenProps> = () => {
         onChangeText={setTitle}
         testID="add-note-title-input"
       />
+
       <ContentInput
         placeholder="Digite alguma coisa..."
         textAlignVertical="top"
@@ -68,6 +69,7 @@ const AddNoteScreen: React.FC<AddNoteScreenProps> = () => {
         testID="add-note-content-input"
         multiline
       />
+
       <SaveButton
         onPress={handleAddNote}
         icon={<SaveIcon />}

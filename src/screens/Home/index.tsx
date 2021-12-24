@@ -1,8 +1,8 @@
-import { useNavigation } from '@react-navigation/native'
 import React, { useState } from 'react'
 import { ListRenderItem } from 'react-native'
 
 import { NotesListItem } from '@/components/notes'
+import { useNavigation } from '@/routes'
 import { useDispatch, useSelector } from '@/store'
 import { noteRemoved, selectAllNotesByTitle } from '@/store/notes'
 import { Note } from '@/types'
