@@ -36,7 +36,7 @@ describe('EditNoteScreen', () => {
     expect(contentInput.props.value).toBe(note.content)
   })
 
-  it('should edit a note and change values in store', async () => {
+  it('should edit a note with new values and show message', async () => {
     const screen = renderWithProviders(EditNoteScreen, {
       noteId: note.id,
     })
@@ -52,10 +52,13 @@ describe('EditNoteScreen', () => {
 
     jest.useFakeTimers()
 
+    fireEvent.press(screen.getByTestId('edit-note-save-button'))
+
     expect(store.getState().notes.entities[note.id]).toMatchObject({
       title: otherTitle,
       content: otherContent,
     })
+    expect(screen.queryByText('Nota atualizada com sucesso!')).toBeTruthy()
   })
 
   it('should remove note, show message and back to previous screen', async () => {
