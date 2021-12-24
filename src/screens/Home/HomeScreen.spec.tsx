@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import { fireEvent } from '@testing-library/react-native'
 import { mocked } from 'jest-mock'
-import React from 'react'
 
 import store from '@/store'
 import { cleanNotes, noteAdded } from '@/store/notes'
@@ -17,13 +16,13 @@ describe('HomeScreen', () => {
   })
 
   it('should renders correctly', () => {
-    const screen = renderWithProviders(<HomeScreen />)
+    const screen = renderWithProviders(HomeScreen)
 
     expect(screen.getByText('Notas')).toBeTruthy()
   })
 
   it('should render notes list and contains one note', () => {
-    const screen = renderWithProviders(<HomeScreen />)
+    const screen = renderWithProviders(HomeScreen)
 
     const notesList = screen.getByTestId('notes-list')
     const notesListItem = screen.queryByTestId(`notes-list-item-${note.id}`)
@@ -39,7 +38,7 @@ describe('HomeScreen', () => {
       navigate: navigateMock,
     }))
 
-    const screen = renderWithProviders(<HomeScreen />)
+    const screen = renderWithProviders(HomeScreen)
 
     const addButton = screen.getByTestId('add-note-button')
     fireEvent.press(addButton)
@@ -48,7 +47,7 @@ describe('HomeScreen', () => {
   })
 
   it('should render notes list and remove one note from screen', () => {
-    const screen = renderWithProviders(<HomeScreen />)
+    const screen = renderWithProviders(HomeScreen)
 
     const notesList = screen.getByTestId('notes-list')
     expect(notesList.props.data).toHaveLength(1)
@@ -61,7 +60,7 @@ describe('HomeScreen', () => {
     const otherNote = mockNote()
     store.dispatch(noteAdded(otherNote))
 
-    const screen = renderWithProviders(<HomeScreen />)
+    const screen = renderWithProviders(HomeScreen)
 
     const notesList = screen.getByTestId('notes-list')
     expect(notesList.props.data).toHaveLength(2)

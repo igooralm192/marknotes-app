@@ -1,8 +1,10 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { render } from '@testing-library/react-native'
 import { NativeBaseProvider } from 'native-base'
 import React from 'react'
 import { Provider } from 'react-redux'
 
+import { RouteStackParamList } from '@/routes/types'
 import store from '@/store'
 import { nbTheme } from '@/themes'
 
@@ -31,6 +33,14 @@ export const Providers: React.FC = ({ children }) => {
   )
 }
 
-export const renderWithProviders = (Component: React.ReactElement) => {
-  return render(Component, { wrapper: Providers })
+export const renderWithProviders = (
+  Component: React.FC<NativeStackScreenProps<RouteStackParamList, any>>,
+  routeParams?: Record<string, any>,
+) => {
+  return render(
+    <Component route={{ params: routeParams } as any} navigation={{} as any} />,
+    {
+      wrapper: (props: any) => <Providers {...props} />,
+    },
+  )
 }

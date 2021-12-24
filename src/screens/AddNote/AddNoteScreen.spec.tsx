@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import { fireEvent } from '@testing-library/react-native'
 import { mocked } from 'jest-mock'
-import React from 'react'
 
 import store from '@/store'
 import { cleanNotes, selectAllNotes } from '@/store/notes'
@@ -22,7 +21,7 @@ describe('AddNoteScreen', () => {
   })
 
   it('should add a new note, show message and back to previous screen', async () => {
-    const screen = renderWithProviders(<AddNoteScreen />)
+    const screen = renderWithProviders(AddNoteScreen)
 
     const titleInput = await screen.findByTestId('add-note-title-input')
     const contentInput = await screen.findByTestId('add-note-content-input')
@@ -40,7 +39,7 @@ describe('AddNoteScreen', () => {
   })
 
   it('should show error message when try add note without title', async () => {
-    const screen = renderWithProviders(<AddNoteScreen />)
+    const screen = renderWithProviders(AddNoteScreen)
 
     jest.useFakeTimers()
 
