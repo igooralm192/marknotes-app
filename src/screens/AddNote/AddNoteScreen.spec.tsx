@@ -13,11 +13,13 @@ describe('AddNoteScreen', () => {
   const dispatchMock = jest.fn()
 
   beforeAll(() => {
-    store.dispatch(cleanNotes())
-
     mocked(useNavigation).mockImplementation(() => ({
       dispatch: dispatchMock,
     }))
+  })
+
+  beforeEach(() => {
+    store.dispatch(cleanNotes())
   })
 
   it('should add a new note, show message and back to previous screen', async () => {
