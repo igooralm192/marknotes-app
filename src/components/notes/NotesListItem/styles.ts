@@ -1,6 +1,7 @@
 import { Box, CloseIcon, IconButton, Pressable } from 'native-base'
 
 import * as UI from '@/components/ui'
+import * as LIB from '@/components/lib'
 import { styled } from '@/utils'
 
 export const Container = styled(Pressable)
@@ -24,8 +25,15 @@ export const Title = styled(UI.Typography, {
   variant: 'subtitle1',
 })
 
-export const Content = styled(UI.Typography, {
+export const Content = styled(LIB.Markdown, {
   mt: 2,
+})
+
+export const Date = styled(UI.Typography, {
+  mt: 6,
+  variant: 'footnote',
+  color: 'divider.500',
+  textAlign: 'right',
 })
 
 export const DeleteButton = styled(IconButton, {
@@ -36,7 +44,7 @@ export const DeleteButton = styled(IconButton, {
   right: -7,
   p: 2.5,
   borderRadius: 'full',
-  bg: 'primary.500',
+  bg: 'error.500',
 })
 
 export const DeleteIcon = styled(CloseIcon, { size: '100%' })
