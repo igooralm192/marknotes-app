@@ -1,6 +1,15 @@
-import { CheckIcon, CloseIcon, KeyboardAvoidingView } from 'native-base'
+import {
+  CheckIcon,
+  CloseIcon,
+  IScrollViewProps,
+  KeyboardAvoidingView,
+  Pressable,
+  ScrollView,
+} from 'native-base'
+import { TextInput } from 'react-native'
 
 import * as UI from '@/components/ui'
+import * as LIB from '@/components/lib'
 import { styled } from '@/utils'
 
 export const Container = styled(KeyboardAvoidingView, {
@@ -27,11 +36,29 @@ export const DateText = styled(UI.Typography, {
   color: 'grey.500',
 })
 
-export const ContentInput = styled(EditNoteInput, {
+export const ContentContainer = styled(Pressable, {
   mt: 4,
   flex: 1,
-  fontSize: 'lg',
-  fontWeight: 500,
+})
+
+export const MarkdownContentContainer = styled<
+  IScrollViewProps & { isEditing?: boolean }
+>(ScrollView, ({ isEditing }) => {
+  return {
+    display: !isEditing ? 'flex' : 'none',
+  }
+})
+export const MarkdownContent = styled(LIB.Markdown)
+
+export const ContentInput = styled<
+  UI.InputProps & { isEditing?: boolean },
+  TextInput
+>(EditNoteInput, ({ isEditing }) => {
+  return {
+    fontSize: 'lg',
+    fontWeight: 500,
+    display: isEditing ? 'flex' : 'none',
+  }
 })
 
 export const SaveButton = styled(UI.FAB, {

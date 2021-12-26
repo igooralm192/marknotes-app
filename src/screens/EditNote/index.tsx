@@ -1,6 +1,7 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { useToast } from 'native-base'
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import { TextInput } from 'react-native'
 
 import { useNavigation } from '@/routes'
 import { RouteStackParamList } from '@/routes/types'
@@ -12,6 +13,9 @@ import {
   Container,
   TitleInput,
   DateText,
+  ContentContainer,
+  MarkdownContentContainer,
+  MarkdownContent,
   ContentInput,
   SaveButton,
   SaveIcon,
@@ -33,6 +37,14 @@ const EditNoteScreen: React.FC<EditNoteScreenProps> = ({ route }) => {
 
   const [title, setTitle] = useState(note?.title ?? '')
   const [content, setContent] = useState(note?.content ?? '')
+
+  const titleInputRef = useRef() as React.MutableRefObject<TextInput>
+  const contentInputRef = useRef() as React.MutableRefObject<TextInput>
+
+  const [isEditing, setIsEditing] = useState(false)
+
+  const showMarkdown = () => setIsEditing(false)
+  const hideMarkdown = () => setIsEditing(true)
 
   const handleSaveNote = () => {
     if (!note) {
@@ -62,6 +74,9 @@ const EditNoteScreen: React.FC<EditNoteScreenProps> = ({ route }) => {
       placement: 'bottom',
       status: 'success',
     })
+
+    titleInputRef?.current?.blur()
+    contentInputRef?.current?.blur()
   }
 
   const handleDeleteNote = () => {
@@ -80,6 +95,12 @@ const EditNoteScreen: React.FC<EditNoteScreenProps> = ({ route }) => {
     navigation.goBack()
   }
 
+  useEffect(() => {
+    if (isEditing) {
+      contentInputRef?.current?.focus()
+    }
+  }, [isEditing])
+
   if (!note) {
     return null
   }
@@ -87,22 +108,36 @@ const EditNoteScreen: React.FC<EditNoteScreenProps> = ({ route }) => {
   return (
     <Container keyboardVerticalOffset={-200} behavior="padding">
       <TitleInput
+        ref={titleInputRef}
         placeholder="Título"
         value={title}
         onChangeText={setTitle}
+        onSubmitEditing={hideMarkdown}
         testID="edit-note-title-input"
       />
 
       <DateText>{formatDate(note.date)}</DateText>
 
-      <ContentInput
-        placeholder="Digite alguma coisa..."
-        textAlignVertical="top"
-        value={content}
-        onChangeText={setContent}
-        testID="edit-note-content-input"
-        multiline
-      />
+      <ContentContainer onPress={hideMarkdown}>
+        <MarkdownContentContainer
+          contentInsetAdjustmentBehavior="automatic"
+          showsVerticalScrollIndicator={false}
+          isEditing={isEditing}>
+          <MarkdownContent text={content} onPress={hideMarkdown} />
+        </MarkdownContentContainer>
+
+        <ContentInput
+          ref={contentInputRef}
+          placeholder="Digite alguma coisa..."
+          textAlignVertical="top"
+          value={content}
+          onChangeText={setContent}
+          onBlur={showMarkdown}
+          isEditing={isEditing}
+          testID="edit-note-content-input"
+          multiline
+        />
+      </ContentContainer>
 
       <DeleteButton
         icon={<DeleteIcon />}
