@@ -1,6 +1,5 @@
-import { MarkdownProps as RNMarkdownProps } from 'react-native-markdown-display'
+import { IPressableProps } from 'native-base'
 
-export interface MarkdownProps extends RNMarkdownProps {
+export interface MarkdownProps extends IPressableProps {
   text: string
-  onPress?: () => void
 }

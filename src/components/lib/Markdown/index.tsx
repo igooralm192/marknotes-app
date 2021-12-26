@@ -8,7 +8,7 @@ import { MarkdownProps } from './types'
 
 const Markdown: React.FC<MarkdownProps> = ({ text, onPress, ...props }) => {
   return (
-    <Pressable onPress={onPress}>
+    <Pressable onPress={onPress} {...props}>
       <RNMarkdown
         style={{
           body: {
@@ -20,8 +20,7 @@ const Markdown: React.FC<MarkdownProps> = ({ text, onPress, ...props }) => {
             marginTop: 0,
             marginBottom: 0,
           },
-        }}
-        {...props}>
+        }}>
         {text}
       </RNMarkdown>
     </Pressable>
