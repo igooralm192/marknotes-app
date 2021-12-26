@@ -12,13 +12,15 @@ const note = mockNote()
 describe('HomeScreen', () => {
   const navigateMock = jest.fn()
 
-  beforeEach(() => {
-    store.dispatch(cleanNotes())
-    store.dispatch(noteAdded(note))
-
+  beforeAll(() => {
     mocked(useNavigation).mockImplementation(() => ({
       navigate: navigateMock,
     }))
+  })
+
+  beforeEach(() => {
+    store.dispatch(cleanNotes())
+    store.dispatch(noteAdded(note))
   })
 
   it('should renders correctly', () => {
