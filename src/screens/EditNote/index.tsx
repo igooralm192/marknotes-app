@@ -122,8 +122,13 @@ const EditNoteScreen: React.FC<EditNoteScreenProps> = ({ route }) => {
         <MarkdownContentContainer
           contentInsetAdjustmentBehavior="automatic"
           showsVerticalScrollIndicator={false}
-          isEditing={isEditing}>
-          <MarkdownContent text={content} onPress={hideMarkdown} />
+          isEditing={isEditing}
+          testID="edit-note-markdown-content-container">
+          <MarkdownContent
+            text={content}
+            onPress={hideMarkdown}
+            testID="edit-note-markdown-content"
+          />
         </MarkdownContentContainer>
 
         <ContentInput
