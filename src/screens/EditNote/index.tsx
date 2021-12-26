@@ -5,8 +5,8 @@ import { TextInput } from 'react-native'
 
 import { useNavigation } from '@/routes'
 import { RouteStackParamList } from '@/routes/types'
-import { useDispatch, useSelector } from '@/store'
-import { noteChanged, noteRemoved, selectNoteById } from '@/store/notes'
+import { useDispatch, useSelector } from '@/stores'
+import { noteChanged, noteRemoved, selectNoteById } from '@/stores/notes'
 import { formatDate } from '@/utils'
 
 import {

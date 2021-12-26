@@ -4,7 +4,7 @@ import { Provider as StoreProvider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 
 import Routes from './routes'
-import store, { persistor } from './store'
+import store, { persistor } from './stores'
 import { nbTheme } from './themes'
 
 const nbConfig = {

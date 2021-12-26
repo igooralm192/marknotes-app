@@ -3,8 +3,8 @@ import { ListRenderItem } from 'react-native'
 
 import { NotesListItem } from '@/components/notes'
 import { useNavigation } from '@/routes'
-import { useDispatch, useSelector } from '@/store'
-import { noteRemoved, selectAllNotesByTitle } from '@/store/notes'
+import { useDispatch, useSelector } from '@/stores'
+import { noteRemoved, selectAllNotesByTitle } from '@/stores/notes'
 import { Note } from '@/types'
 
 import {

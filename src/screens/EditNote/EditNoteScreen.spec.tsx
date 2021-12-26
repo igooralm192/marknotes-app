@@ -3,8 +3,8 @@ import { act, fireEvent } from '@testing-library/react-native'
 import faker from 'faker'
 import { mocked } from 'jest-mock'
 
-import store from '@/store'
-import { cleanNotes, noteAdded, selectAllNotes } from '@/store/notes'
+import store from '@/stores'
+import { cleanNotes, noteAdded, selectAllNotes } from '@/stores/notes'
 import { formatDate, mockNote, renderWithProviders } from '@/utils'
 import EditNoteScreen from '.'
 

@@ -4,8 +4,8 @@ import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 import { useNavigation } from '@/routes'
-import { useDispatch } from '@/store'
-import { noteAdded } from '@/store/notes'
+import { useDispatch } from '@/stores'
+import { noteAdded } from '@/stores/notes'
 import {
   Container,
   TitleInput,

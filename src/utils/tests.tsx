@@ -5,7 +5,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 
 import { RouteStackParamList } from '@/routes/types'
-import store from '@/store'
+import store from '@/stores'
 import { nbTheme } from '@/themes'
 
 export const ThemeProvider: React.FC = ({ children }) => {

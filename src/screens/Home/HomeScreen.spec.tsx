@@ -2,8 +2,8 @@ import { useNavigation } from '@react-navigation/native'
 import { fireEvent } from '@testing-library/react-native'
 import { mocked } from 'jest-mock'
 
-import store from '@/store'
-import { cleanNotes, noteAdded } from '@/store/notes'
+import store from '@/stores'
+import { cleanNotes, noteAdded } from '@/stores/notes'
 import { mockNote, renderWithProviders } from '@/utils'
 import HomeScreen from '.'
 

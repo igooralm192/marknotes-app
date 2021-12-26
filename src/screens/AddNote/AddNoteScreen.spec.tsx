@@ -2,8 +2,8 @@ import { useNavigation } from '@react-navigation/native'
 import { fireEvent } from '@testing-library/react-native'
 import { mocked } from 'jest-mock'
 
-import store from '@/store'
-import { cleanNotes, selectAllNotes } from '@/store/notes'
+import store from '@/stores'
+import { cleanNotes, selectAllNotes } from '@/stores/notes'
 import { mockNote, renderWithProviders } from '@/utils'
 import AddNoteScreen from '.'
 
