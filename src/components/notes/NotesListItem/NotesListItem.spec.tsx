@@ -1,14 +1,28 @@
 import { fireEvent, render } from '@testing-library/react-native'
+import { mocked } from 'jest-mock'
 import React from 'react'
 
-import { mockNote, ThemeProvider } from '@/utils'
+import { formatDate, mockNote, ThemeProvider } from '@/utils'
 import NotesListItem from '.'
 
 const note = mockNote()
 const onDeleteNoteMock = jest.fn()
 
+jest.mock('@/utils', () => {
+  const utilsActual = jest.requireActual('@/utils')
+
+  return {
+    ...utilsActual,
+    formatDate: jest.fn(s => s),
+  }
+})
+
 describe('HomeScreen', () => {
   it('should renders correctly', () => {
+    const formatDateMocked = mocked(formatDate)
+
+    formatDateMocked.mockImplementationOnce(s => s)
+
     const screen = render(
       <NotesListItem {...note} onDeleteNote={onDeleteNoteMock} />,
       {
@@ -16,8 +30,9 @@ describe('HomeScreen', () => {
       },
     )
 
-    expect(screen.getByText(note.title)).toBeDefined()
-    expect(screen.getByText(note.content)).toBeDefined()
+    expect(screen.getByText(note.title)).toBeTruthy()
+    expect(screen.getByText(note.content)).toBeTruthy()
+    expect(formatDateMocked).toHaveBeenCalledWith(note.date)
   })
 
   it('should call method on delete icon press', () => {

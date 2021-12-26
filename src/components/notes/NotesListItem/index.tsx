@@ -2,12 +2,14 @@ import { IPressableProps } from 'native-base'
 import React, { memo } from 'react'
 
 import { Note } from '@/types'
+import { formatDate } from '@/utils'
 
 import {
   Container,
   Card,
   Title,
   Content,
+  Date,
   DeleteButton,
   DeleteIcon,
 } from './styles'
@@ -20,6 +22,7 @@ const NotesListItem: React.FC<NotesListItemProps> = ({
   id,
   title,
   content,
+  date,
   onDeleteNote,
   ...props
 }) => {
@@ -27,8 +30,8 @@ const NotesListItem: React.FC<NotesListItemProps> = ({
     <Container {...props}>
       <Card>
         <Title>{title}</Title>
-
-        <Content>{content}</Content>
+        <Content text={content} onPress={props.onPress} />
+        <Date>{formatDate(date)}</Date>
 
         <DeleteButton
           icon={<DeleteIcon />}
