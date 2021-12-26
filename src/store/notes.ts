@@ -4,7 +4,8 @@ import { Note } from '@/types'
 import { AppState } from '.'
 
 const notesAdapter = createEntityAdapter<Note>({
-  sortComparer: (a, b) => b.date.valueOf() - a.date.valueOf(),
+  sortComparer: (a, b) =>
+    new Date(b.date).valueOf() - new Date(a.date).valueOf(),
 })
 
 const notesSlice = createSlice({

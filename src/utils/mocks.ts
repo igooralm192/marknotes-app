@@ -6,6 +6,6 @@ export const mockNote = (): Note => {
     id: faker.datatype.uuid(),
     title: faker.random.words(),
     content: faker.random.words(),
-    date: faker.datatype.datetime(),
+    date: faker.datatype.datetime().toISOString(),
   }
 }

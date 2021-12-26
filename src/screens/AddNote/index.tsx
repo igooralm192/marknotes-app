@@ -42,7 +42,7 @@ const AddNoteScreen: React.FC<AddNoteScreenProps> = () => {
         id,
         title,
         content,
-        date: new Date(),
+        date: new Date().toISOString(),
       }),
     )
 
