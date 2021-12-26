@@ -1,10 +1,7 @@
-import {
-  Box,
-  FlatList,
-  SearchIcon as NBSearchIcon,
-  AddIcon as NBAddIcon,
-} from 'native-base'
+import { Box, FlatList, SearchIcon as NBSearchIcon, Icon } from 'native-base'
 import { FlatListProps } from 'react-native'
+
+import PlusIconSVG from '@/assets/svgs/icon-plus.svg'
 
 import * as UI from '@/components/ui'
 import { styled } from '@/utils'
@@ -49,6 +46,6 @@ export const NotesList = styled<FlatListProps<Note>>(FlatList, {
 
 export const AddButton = styled(UI.FAB)
 
-export const AddIcon = styled(NBAddIcon, {
-  size: 'sm',
+export const AddIcon = styled(Icon, {
+  as: PlusIconSVG,
 })
