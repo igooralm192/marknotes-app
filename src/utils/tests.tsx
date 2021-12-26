@@ -2,7 +2,8 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { render } from '@testing-library/react-native'
 import { NativeBaseProvider } from 'native-base'
 import React from 'react'
-import { Provider } from 'react-redux'
+import { Provider as ReduxProvider } from 'react-redux'
+import { ThemeProvider as StyledProvider } from 'styled-components/native'
 
 import { RouteStackParamList } from '@/routes/types'
 import store from '@/stores'
@@ -15,14 +16,16 @@ export const ThemeProvider: React.FC = ({ children }) => {
   }
 
   return (
-    <NativeBaseProvider initialWindowMetrics={inset} theme={nbTheme}>
-      {children}
-    </NativeBaseProvider>
+    <StyledProvider theme={nbTheme}>
+      <NativeBaseProvider initialWindowMetrics={inset} theme={nbTheme}>
+        {children}
+      </NativeBaseProvider>
+    </StyledProvider>
   )
 }
 
 export const StoreProvider: React.FC = ({ children }) => {
-  return <Provider store={store}>{children}</Provider>
+  return <ReduxProvider store={store}>{children}</ReduxProvider>
 }
 
 export const Providers: React.FC = ({ children }) => {
