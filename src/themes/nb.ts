@@ -41,7 +41,7 @@ export const nbTheme = extendTheme({
       500: '#4ADE80',
     },
     error: {
-      700: '#DD4848',
+      500: '#DD4848',
     },
   },
   fontConfig: {
@@ -111,7 +111,7 @@ export const defaultColors: Record<NBThemeColors, string> = {
   white: 'white.500',
   grey: 'grey.500',
   success: 'success.500',
-  error: 'error.700',
+  error: 'error.500',
 }
 
 declare module 'native-base' {
