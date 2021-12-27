@@ -15,7 +15,7 @@ const IconButton: React.FC<IconButtonProps> = ({
     defaultColors[colorScheme as NBThemeColors],
   )
 
-  const ContrastIcon = icon ? <Icon name={icon} /> : undefined
+  const ContrastIcon = icon ? <Icon name={icon} size="sm" /> : undefined
 
   return (
     <NBIconButton
