@@ -1,6 +1,15 @@
 import { extendTheme } from 'native-base'
 
 export const nbTheme = extendTheme({
+  components: {
+    Icon: {
+      sizes: {
+        lg: 32,
+        md: 20,
+        sm: 14,
+      },
+    },
+  },
   colors: {
     primary: {
       200: '#DDFB62',
