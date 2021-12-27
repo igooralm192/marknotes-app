@@ -6,13 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { useNavigation } from '@/routes'
 import { useDispatch } from '@/stores'
 import { noteAdded } from '@/stores/notes'
-import {
-  Container,
-  TitleInput,
-  ContentInput,
-  SaveButton,
-  SaveIcon,
-} from './styles'
+import { Container, TitleInput, ContentInput, SaveButton } from './styles'
 
 export interface AddNoteScreenProps {}
 
@@ -72,8 +66,8 @@ const AddNoteScreen: React.FC<AddNoteScreenProps> = () => {
       />
 
       <SaveButton
+        icon="save"
         onPress={handleAddNote}
-        icon={<SaveIcon />}
         testID="add-note-save-button"
       />
     </Container>
