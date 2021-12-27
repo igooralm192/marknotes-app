@@ -18,9 +18,7 @@ import {
   MarkdownContent,
   ContentInput,
   SaveButton,
-  SaveIcon,
   DeleteButton,
-  DeleteIcon,
 } from './styles'
 
 export interface EditNoteScreenProps
@@ -145,13 +143,13 @@ const EditNoteScreen: React.FC<EditNoteScreenProps> = ({ route }) => {
       </ContentContainer>
 
       <DeleteButton
-        icon={<DeleteIcon />}
+        icon="trash"
         onPress={handleDeleteNote}
         testID="edit-note-delete-button"
       />
 
       <SaveButton
-        icon={<SaveIcon />}
+        icon="save"
         onPress={handleSaveNote}
         testID="edit-note-save-button"
       />

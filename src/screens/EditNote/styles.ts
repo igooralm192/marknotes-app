@@ -1,14 +1,27 @@
 import {
-  CheckIcon,
-  CloseIcon,
+  IScrollViewProps,
   KeyboardAvoidingView,
   Pressable,
   ScrollView,
 } from 'native-base'
+import React from 'react'
+import { TextInput } from 'react-native'
 import styled from 'styled-components/native'
 
 import * as UI from '@/components/ui'
 import * as LIB from '@/components/lib'
+
+type IsEditingProps = {
+  isEditing?: boolean
+}
+
+type Input = React.ForwardRefExoticComponent<
+  UI.InputProps & React.RefAttributes<TextInput> & IsEditingProps
+>
+
+type ScrollView = React.ForwardRefExoticComponent<
+  IScrollViewProps & React.RefAttributes<unknown> & IsEditingProps
+>
 
 export const Container = styled(KeyboardAvoidingView).attrs({
   px: 6,
@@ -39,39 +52,31 @@ export const ContentContainer = styled(Pressable).attrs({
   flex: 1,
 })``
 
-export const MarkdownContentContainer = styled(ScrollView).attrs<{
-  isEditing?: boolean
-}>(({ isEditing }) => {
-  return {
-    display: !isEditing ? 'flex' : 'none',
-  }
-})``
+export const MarkdownContentContainer = styled<ScrollView>(ScrollView).attrs(
+  ({ isEditing }) => {
+    return {
+      display: !isEditing ? 'flex' : 'none',
+    }
+  },
+)``
 
 export const MarkdownContent = styled(LIB.Markdown)``
 
-export const ContentInput = styled(EditNoteInput).attrs<{
-  isEditing?: boolean
-}>(({ isEditing }) => {
-  return {
-    fontSize: 'lg',
-    fontWeight: 500,
-    display: isEditing ? 'flex' : 'none',
-  }
-})``
+export const ContentInput = styled<Input>(EditNoteInput).attrs(
+  ({ isEditing }) => {
+    return {
+      fontSize: 'lg',
+      fontWeight: 500,
+      display: isEditing ? 'flex' : 'none',
+    }
+  },
+)``
 
 export const SaveButton = styled(UI.FAB).attrs({
   colorScheme: 'success',
 })``
 
-export const SaveIcon = styled(CheckIcon).attrs({
-  size: 'sm',
-})``
-
 export const DeleteButton = styled(UI.FAB).attrs({
   bottom: 32,
   colorScheme: 'error',
-})``
-
-export const DeleteIcon = styled(CloseIcon).attrs({
-  size: 'sm',
 })``
