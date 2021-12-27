@@ -11,9 +11,8 @@ const IconButton: React.FC<IconButtonProps> = ({
   colorScheme = 'primary',
   ...props
 }) => {
-  const iconContrastColor = useContrastText(
-    defaultColors[colorScheme as NBThemeColors],
-  )
+  const defaultColor = defaultColors[colorScheme as NBThemeColors]
+  const iconContrastColor = useContrastText(defaultColor)
 
   const ContrastIcon = icon ? <Icon name={icon} size="sm" /> : undefined
 
@@ -22,6 +21,7 @@ const IconButton: React.FC<IconButtonProps> = ({
       _icon={{
         color: iconContrastColor,
       }}
+      bg={defaultColor}
       icon={ContrastIcon}
       variant="solid"
       colorScheme={colorScheme}

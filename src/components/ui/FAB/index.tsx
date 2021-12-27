@@ -11,9 +11,8 @@ const FAB: React.FC<FABProps> = ({
   colorScheme = 'primary',
   ...props
 }) => {
-  const iconContrastColor = useContrastText(
-    defaultColors[colorScheme as NBThemeColors],
-  )
+  const defaultColor = defaultColors[colorScheme as NBThemeColors]
+  const iconContrastColor = useContrastText(defaultColor)
 
   const ContrastIcon = icon && <Icon name={icon} color={iconContrastColor} />
 
@@ -22,6 +21,7 @@ const FAB: React.FC<FABProps> = ({
       right={6}
       bottom={12}
       icon={ContrastIcon}
+      bg={defaultColor}
       colorScheme={colorScheme}
       renderInPortal={false}
       {...props}
