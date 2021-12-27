@@ -1,6 +1,6 @@
 import { NativeBaseProvider } from 'native-base'
 import React from 'react'
-import { Provider as StoreProvider } from 'react-redux'
+import { Provider as ReduxProvider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { ThemeProvider as StyledProvider } from 'styled-components/native'
 
@@ -16,7 +16,7 @@ const nbConfig = {
 
 const App = () => {
   return (
-    <StoreProvider store={store}>
+    <ReduxProvider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <StyledProvider theme={nbTheme}>
           <NativeBaseProvider config={nbConfig} theme={nbTheme}>
@@ -24,7 +24,7 @@ const App = () => {
           </NativeBaseProvider>
         </StyledProvider>
       </PersistGate>
-    </StoreProvider>
+    </ReduxProvider>
   )
 }
 export default App
