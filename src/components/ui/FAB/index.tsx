@@ -23,6 +23,7 @@ const FAB: React.FC<FABProps> = ({
       bottom={12}
       icon={ContrastIcon}
       colorScheme={colorScheme}
+      renderInPortal={false}
       {...props}
     />
   )
