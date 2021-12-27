@@ -14,7 +14,6 @@ import {
   SearchIcon,
   NotesList,
   AddButton,
-  AddIcon,
 } from './styles'
 
 const HomeScreen: React.FC = () => {
@@ -63,7 +62,7 @@ const HomeScreen: React.FC = () => {
       />
 
       <AddButton
-        icon={<AddIcon />}
+        icon="plus"
         onPress={navigateToAddNote}
         testID="add-note-button"
       />

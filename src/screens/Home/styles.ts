@@ -42,6 +42,3 @@ export const NotesList = styled<React.FC<FlatListProps<Note>>>(FlatList).attrs({
 })``
 
 export const AddButton = styled(UI.FAB)``
-export const AddIcon = styled(UI.Icon).attrs({
-  name: 'plus',
-})``

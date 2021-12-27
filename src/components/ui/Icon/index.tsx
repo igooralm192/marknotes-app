@@ -1,16 +1,28 @@
-import { Icon as NBIcon } from 'native-base'
+import { Icon as NBIcon, useToken } from 'native-base'
 import React from 'react'
+import { SvgProps } from 'react-native-svg'
 
 import PlusIconSVG from '@/assets/svgs/icon-plus.svg'
 
 import { IconName, IconProps } from './types'
 
-const iconSVGMap: Record<IconName, React.FC> = {
+const iconSVGMap: Record<IconName, React.FC<SvgProps>> = {
   plus: PlusIconSVG,
 }
 
-const Icon: React.FC<IconProps> = ({ name, ...props }) => {
-  return <NBIcon as={iconSVGMap[name]} {...props} />
+const Icon: React.FC<IconProps> = ({
+  name,
+  color = 'primary.200',
+  ...props
+}) => {
+  const [colorToken] = useToken('colors', [color as string])
+
+  return (
+    <NBIcon
+      as={React.createElement(iconSVGMap[name], { fill: colorToken })}
+      {...props}
+    />
+  )
 }
 
 export default Icon

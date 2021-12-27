@@ -1,3 +1,7 @@
 import { IFabProps } from 'native-base'
 
-export interface FABProps extends IFabProps {}
+import { IconName } from '../Icon/types'
+
+export interface FABProps extends Omit<IFabProps, 'icon'> {
+  icon?: IconName
+}
