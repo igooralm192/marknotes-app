@@ -32,7 +32,7 @@ export const nbTheme = extendTheme({
       500: '#4ADE80',
     },
     error: {
-      500: '#DD4848',
+      700: '#DD4848',
     },
   },
   fontConfig: {
@@ -81,8 +81,30 @@ export const nbTheme = extendTheme({
   },
 })
 
-type NBThemeType = typeof nbTheme
+export type NBTheme = typeof nbTheme
+export type NBThemeColors = keyof Pick<
+  NBTheme['colors'],
+  | 'primary'
+  | 'background'
+  | 'card'
+  | 'divider'
+  | 'white'
+  | 'grey'
+  | 'success'
+  | 'error'
+>
+
+export const defaultColors: Record<NBThemeColors, string> = {
+  primary: 'primary.200',
+  background: 'background.500',
+  card: 'card.500',
+  divider: 'divider.500',
+  white: 'white.500',
+  grey: 'grey.500',
+  success: 'success.500',
+  error: 'error.700',
+}
 
 declare module 'native-base' {
-  interface ICustomTheme extends NBThemeType {}
+  interface ICustomTheme extends NBTheme {}
 }
