@@ -1,4 +1,4 @@
-import { Box, CloseIcon, IconButton, Pressable } from 'native-base'
+import { Box, Pressable } from 'native-base'
 import styled from 'styled-components/native'
 
 import * as UI from '@/components/ui'
@@ -36,15 +36,12 @@ export const Date = styled(UI.Typography).attrs({
   textAlign: 'right',
 })``
 
-export const DeleteButton = styled(IconButton).attrs({
+export const DeleteButton = styled(UI.IconButton).attrs({
   position: 'absolute',
   width: 30,
   height: 30,
   top: -7,
   right: -7,
-  p: 2.5,
   borderRadius: 'full',
-  bg: 'error.500',
+  colorScheme: 'error',
 })``
-
-export const DeleteIcon = styled(CloseIcon).attrs({ size: '100%' })``

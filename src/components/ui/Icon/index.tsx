@@ -4,6 +4,7 @@ import { SvgProps } from 'react-native-svg'
 
 import CloseIconSVG from '@/assets/svgs/icon-close.svg'
 import PlusIconSVG from '@/assets/svgs/icon-plus.svg'
+import { defaultColors } from '@/themes'
 
 import { IconName, IconProps } from './types'
 
@@ -14,7 +15,7 @@ const iconSVGMap: Record<IconName, React.FC<SvgProps>> = {
 
 const Icon: React.FC<IconProps> = ({
   name,
-  color = 'primary.200',
+  color = defaultColors.primary,
   ...props
 }) => {
   const [colorToken] = useToken('colors', [color as string])

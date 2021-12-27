@@ -4,15 +4,7 @@ import React, { memo } from 'react'
 import { Note } from '@/types'
 import { formatDate } from '@/utils'
 
-import {
-  Container,
-  Card,
-  Title,
-  Content,
-  Date,
-  DeleteButton,
-  DeleteIcon,
-} from './styles'
+import { Container, Card, Title, Content, Date, DeleteButton } from './styles'
 
 export interface NotesListItemProps extends IPressableProps, Note {
   onDeleteNote: (noteId: string) => void
@@ -34,7 +26,7 @@ const NotesListItem: React.FC<NotesListItemProps> = ({
         <Date>{formatDate(date)}</Date>
 
         <DeleteButton
-          icon={<DeleteIcon />}
+          icon="close"
           onPress={() => onDeleteNote(id)}
           testID={`note-${id}-delete-button`}
         />
