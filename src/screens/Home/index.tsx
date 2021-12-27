@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { ListRenderItem } from 'react-native'
 
-import { NotesListItem } from '@/components/notes'
+import { NotesListItem } from '@/components/core'
 import { useNavigation } from '@/routes'
 import { useDispatch, useSelector } from '@/stores'
 import { noteRemoved, selectAllNotesByTitle } from '@/stores/notes'
