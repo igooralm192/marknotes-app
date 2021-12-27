@@ -1,6 +1,6 @@
 import { IIconProps } from 'native-base'
 
-export type IconName = 'plus'
+export type IconName = 'close' | 'plus'
 
 export interface IconProps extends IIconProps {
   name: IconName
