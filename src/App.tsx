@@ -4,6 +4,7 @@ import { Provider as ReduxProvider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { ThemeProvider as StyledProvider } from 'styled-components/native'
 
+import { NotesProvider } from './contexts'
 import Routes from './routes'
 import store, { persistor } from './stores'
 import { nbTheme } from './themes'
@@ -20,7 +21,9 @@ const App = () => {
       <PersistGate loading={null} persistor={persistor}>
         <StyledProvider theme={nbTheme}>
           <NativeBaseProvider config={nbConfig} theme={nbTheme}>
-            <Routes />
+            <NotesProvider>
+              <Routes />
+            </NotesProvider>
           </NativeBaseProvider>
         </StyledProvider>
       </PersistGate>

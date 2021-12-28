@@ -5,6 +5,7 @@ import React from 'react'
 import { Provider as ReduxProvider } from 'react-redux'
 import { ThemeProvider as StyledProvider } from 'styled-components/native'
 
+import { NotesProvider } from '@/contexts'
 import { RouteStackParamList } from '@/routes/types'
 import store from '@/stores'
 import { nbTheme } from '@/themes'
@@ -31,7 +32,9 @@ export const StoreProvider: React.FC = ({ children }) => {
 export const Providers: React.FC = ({ children }) => {
   return (
     <StoreProvider>
-      <ThemeProvider>{children}</ThemeProvider>
+      <ThemeProvider>
+        <NotesProvider>{children}</NotesProvider>
+      </ThemeProvider>
     </StoreProvider>
   )
 }
