@@ -4,9 +4,13 @@ import RNMarkdown from 'react-native-markdown-display'
 
 import { nbTheme } from '@/themes'
 
-import { MarkdownProps } from './types'
+import { MarkdownDisplayProps } from './types'
 
-const Markdown: React.FC<MarkdownProps> = ({ text, onPress, ...props }) => {
+const MarkdownDisplay: React.FC<MarkdownDisplayProps> = ({
+  text,
+  onPress,
+  ...props
+}) => {
   return (
     <Pressable onPress={onPress} {...props}>
       <RNMarkdown
@@ -27,4 +31,4 @@ const Markdown: React.FC<MarkdownProps> = ({ text, onPress, ...props }) => {
   )
 }
 
-export default Markdown
+export default MarkdownDisplay

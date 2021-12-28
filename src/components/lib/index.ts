@@ -1,2 +1,2 @@
-export { default as Markdown } from './Markdown'
-export * from './Markdown/types'
+export { default as MarkdownDisplay } from './MarkdownDisplay'
+export * from './MarkdownDisplay/types'
