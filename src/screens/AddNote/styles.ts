@@ -1,7 +1,7 @@
 import { CheckIcon, KeyboardAvoidingView } from 'native-base'
 import styled from 'styled-components/native'
 
-import * as UI from '@/components/ui'
+import * as Ui from '@/components/ui'
 
 export const Container = styled(KeyboardAvoidingView).attrs({
   px: 6,
@@ -11,7 +11,7 @@ export const Container = styled(KeyboardAvoidingView).attrs({
   bg: 'background.500',
 })``
 
-const AddNoteInput = styled(UI.Input).attrs({
+const AddNoteInput = styled(Ui.Input).attrs({
   px: 0,
   py: 0,
   borderWidth: 0,
@@ -29,7 +29,7 @@ export const ContentInput = styled(AddNoteInput).attrs({
   fontWeight: 500,
 })``
 
-export const SaveButton = styled(UI.FAB).attrs({
+export const SaveButton = styled(Ui.FAB).attrs({
   colorScheme: 'success',
 })``
 

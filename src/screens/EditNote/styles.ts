@@ -8,15 +8,15 @@ import React from 'react'
 import { TextInput } from 'react-native'
 import styled from 'styled-components/native'
 
-import * as UI from '@/components/ui'
-import * as LIB from '@/components/lib'
+import * as Ui from '@/components/ui'
+import * as Lib from '@/components/lib'
 
 type IsEditingProps = {
   isEditing?: boolean
 }
 
 type Input = React.ForwardRefExoticComponent<
-  UI.InputProps & React.RefAttributes<TextInput> & IsEditingProps
+  Ui.InputProps & React.RefAttributes<TextInput> & IsEditingProps
 >
 
 type ScrollView = React.ForwardRefExoticComponent<
@@ -31,7 +31,7 @@ export const Container = styled(KeyboardAvoidingView).attrs({
   bg: 'background.500',
 })``
 
-const EditNoteInput = styled(UI.Input).attrs({
+const EditNoteInput = styled(Ui.Input).attrs({
   px: 0,
   py: 0,
   borderWidth: 0,
@@ -42,7 +42,7 @@ export const TitleInput = styled(EditNoteInput).attrs({
   fontWeight: 'bold',
 })``
 
-export const DateText = styled(UI.Typography).attrs({
+export const DateText = styled(Ui.Typography).attrs({
   variant: 'label',
   color: 'grey.500',
 })``
@@ -60,7 +60,7 @@ export const MarkdownContentContainer = styled<ScrollView>(ScrollView).attrs(
   },
 )``
 
-export const MarkdownContent = styled(LIB.Markdown)``
+export const MarkdownContent = styled(Lib.MarkdownDisplay)``
 
 export const ContentInput = styled<Input>(EditNoteInput).attrs(
   ({ isEditing }) => {
@@ -72,11 +72,11 @@ export const ContentInput = styled<Input>(EditNoteInput).attrs(
   },
 )``
 
-export const SaveButton = styled(UI.FAB).attrs({
+export const SaveButton = styled(Ui.FAB).attrs({
   colorScheme: 'success',
 })``
 
-export const DeleteButton = styled(UI.FAB).attrs({
+export const DeleteButton = styled(Ui.FAB).attrs({
   bottom: 32,
   colorScheme: 'error',
 })``

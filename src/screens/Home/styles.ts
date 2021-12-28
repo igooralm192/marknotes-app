@@ -3,7 +3,7 @@ import React from 'react'
 import { FlatListProps } from 'react-native'
 import styled from 'styled-components/native'
 
-import * as UI from '@/components/ui'
+import * as Ui from '@/components/ui'
 import { Note } from '@/types'
 
 export const Container = styled(Box).attrs({
@@ -14,7 +14,7 @@ export const Container = styled(Box).attrs({
   bg: 'background.500',
 })``
 
-export const Title = styled(UI.Typography).attrs({
+export const Title = styled(Ui.Typography).attrs({
   variant: 'h1',
 })``
 
@@ -24,7 +24,7 @@ export const SearchIcon = styled(NBSearchIcon).attrs({
   color: 'white.500:alpha.50',
 })``
 
-export const SearchInput = styled(UI.Input).attrs({
+export const SearchInput = styled(Ui.Input).attrs({
   mt: 8,
   p: 3,
   borderWidth: 0,
@@ -41,4 +41,4 @@ export const NotesList = styled<React.FC<FlatListProps<Note>>>(FlatList).attrs({
   },
 })``
 
-export const AddButton = styled(UI.FAB)``
+export const AddButton = styled(Ui.FAB)``
