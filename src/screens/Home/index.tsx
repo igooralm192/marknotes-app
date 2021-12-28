@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react'
 
 import { useNotes } from '@/contexts'
+import { Toast } from '@/helpers'
 import { useNavigation } from '@/routes'
 import { noteTitleIncludesText } from '@/stores/notes'
 
@@ -24,6 +25,12 @@ const HomeScreen: React.FC = () => {
     [notes, searchText],
   )
 
+  const handleDeleteNote = (noteId: string) => {
+    deleteNote(noteId)
+
+    Toast.error('Nota removida com sucesso!')
+  }
+
   const navigateToAddNote = () => navigation.navigate('AddNoteScreen')
   const navigateToEditNote = (noteId: string) =>
     navigation.navigate('EditNoteScreen', { noteId })
@@ -42,7 +49,7 @@ const HomeScreen: React.FC = () => {
       <NotesList
         notes={notesFilteredByTitle}
         onPressNote={navigateToEditNote}
-        onDeleteNote={deleteNote}
+        onDeleteNote={handleDeleteNote}
       />
 
       <AddButton

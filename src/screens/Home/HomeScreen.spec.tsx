@@ -53,8 +53,11 @@ describe('HomeScreen', () => {
     const notesList = screen.getByTestId('notes-list')
     expect(notesList.props.data).toHaveLength(1)
 
+    jest.useFakeTimers()
+
     fireEvent.press(screen.getByTestId(`note-${note.id}-delete-button`))
     expect(notesList.props.data).toHaveLength(0)
+    expect(screen.queryByText('Nota removida com sucesso!')).toBeTruthy()
   })
 
   it('should filter notes in list', async () => {
