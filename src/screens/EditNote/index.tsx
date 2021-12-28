@@ -1,12 +1,11 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { useToast } from 'native-base'
 import React, { useState, useEffect, useRef } from 'react'
 import { TextInput } from 'react-native'
 
+import { useNotes } from '@/contexts'
+import { Toast } from '@/helpers'
 import { useNavigation } from '@/routes'
 import { RouteStackParamList } from '@/routes/types'
-import { useDispatch, useSelector } from '@/stores'
-import { noteChanged, noteRemoved, selectNoteById } from '@/stores/notes'
 import { formatDate } from '@/utils'
 
 import {
@@ -27,11 +26,9 @@ export interface EditNoteScreenProps
 const EditNoteScreen: React.FC<EditNoteScreenProps> = ({ route }) => {
   const { noteId } = route.params
 
-  const toast = useToast()
-  const dispatch = useDispatch()
   const navigation = useNavigation()
-
-  const note = useSelector(state => selectNoteById(state, noteId))
+  const { notesById, editNote, deleteNote } = useNotes()
+  const note = notesById[noteId]
 
   const [title, setTitle] = useState(note?.title ?? '')
   const [content, setContent] = useState(note?.content ?? '')
@@ -45,50 +42,22 @@ const EditNoteScreen: React.FC<EditNoteScreenProps> = ({ route }) => {
   const hideMarkdown = () => setIsEditing(true)
 
   const handleSaveNote = () => {
-    if (!note) {
-      return
+    try {
+      editNote(noteId, title, content)
+
+      Toast.success('Nota atualizada com sucesso!')
+
+      titleInputRef?.current?.blur()
+      contentInputRef?.current?.blur()
+    } catch (err) {
+      Toast.error('Nota removida com sucesso!')
     }
-
-    if (title.trim().length === 0) {
-      toast.show({
-        title: 'Sua nota precisa de um título!',
-        placement: 'bottom',
-        status: 'error',
-      })
-
-      return
-    }
-
-    dispatch(
-      noteChanged({
-        ...note,
-        title,
-        content,
-      }),
-    )
-
-    toast.show({
-      title: 'Nota atualizada com sucesso!',
-      placement: 'bottom',
-      status: 'success',
-    })
-
-    titleInputRef?.current?.blur()
-    contentInputRef?.current?.blur()
   }
 
   const handleDeleteNote = () => {
-    if (!note) {
-      return
-    }
+    deleteNote(noteId)
 
-    dispatch(noteRemoved(noteId))
-
-    toast.show({
-      title: 'Nota removida com sucesso!',
-      placement: 'bottom',
-      status: 'success',
-    })
+    Toast.error('Nota removida com sucesso!')
 
     navigation.goBack()
   }
