@@ -13,7 +13,7 @@ const notesSlice = createSlice({
   initialState: notesAdapter.getInitialState(),
   reducers: {
     noteAdded: notesAdapter.addOne,
-    noteChanged: notesAdapter.setOne,
+    noteChanged: notesAdapter.updateOne,
     noteRemoved: notesAdapter.removeOne,
     cleanNotes: notesAdapter.removeAll,
   },
