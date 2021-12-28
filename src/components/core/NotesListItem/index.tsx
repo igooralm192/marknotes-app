@@ -19,7 +19,7 @@ const NotesListItem: React.FC<NotesListItemProps> = ({
   ...props
 }) => {
   return (
-    <Container {...props}>
+    <Container {...props} testID={`notes-list-item-${id}`}>
       <Card>
         <Title>{title}</Title>
         <Content text={content} onPress={props.onPress} />

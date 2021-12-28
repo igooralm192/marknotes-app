@@ -1,10 +1,8 @@
-import { Box, FlatList, SearchIcon as NBSearchIcon } from 'native-base'
-import React from 'react'
-import { FlatListProps } from 'react-native'
+import { Box, SearchIcon as NBSearchIcon } from 'native-base'
 import styled from 'styled-components/native'
 
 import * as Ui from '@/components/ui'
-import { Note } from '@/types'
+import * as Core from '@/components/core'
 
 export const Container = styled(Box).attrs({
   px: 6,
@@ -32,13 +30,6 @@ export const SearchInput = styled(Ui.Input).attrs({
   bg: 'card.500:alpha.50',
 })``
 
-export const NotesList = styled<React.FC<FlatListProps<Note>>>(FlatList).attrs({
-  mt: 4,
-  mx: -6,
-  contentContainerStyle: {
-    paddingVertical: 8,
-    paddingHorizontal: 24,
-  },
-})``
+export const NotesList = styled(Core.NotesList)``
 
 export const AddButton = styled(Ui.FAB)``

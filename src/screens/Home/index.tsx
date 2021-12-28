@@ -1,11 +1,8 @@
-import React, { useState } from 'react'
-import { ListRenderItem } from 'react-native'
+import React, { useMemo, useState } from 'react'
 
-import { NotesListItem } from '@/components/core'
+import { useNotes } from '@/contexts'
 import { useNavigation } from '@/routes'
-import { useDispatch, useSelector } from '@/stores'
-import { noteRemoved, selectAllNotesByTitle } from '@/stores/notes'
-import { Note } from '@/types'
+import { noteTitleIncludesText } from '@/stores/notes'
 
 import {
   Container,
@@ -17,31 +14,19 @@ import {
 } from './styles'
 
 const HomeScreen: React.FC = () => {
-  const dispatch = useDispatch()
   const navigation = useNavigation()
 
   const [searchText, setSearchText] = useState('')
+  const { notes, deleteNote } = useNotes()
 
-  const notes = useSelector(selectAllNotesByTitle(searchText))
+  const notesFilteredByTitle = useMemo(
+    () => notes.filter(noteTitleIncludesText(searchText)),
+    [notes, searchText],
+  )
 
   const navigateToAddNote = () => navigation.navigate('AddNoteScreen')
   const navigateToEditNote = (noteId: string) =>
     navigation.navigate('EditNoteScreen', { noteId })
-
-  const handleDeleteNote = (noteId: string) => {
-    dispatch(noteRemoved(noteId))
-  }
-
-  const renderNotesListItem: ListRenderItem<Note> = ({ item }) => {
-    return (
-      <NotesListItem
-        {...item}
-        onPress={() => navigateToEditNote(item.id)}
-        onDeleteNote={handleDeleteNote}
-        testID={`notes-list-item-${item.id}`}
-      />
-    )
-  }
 
   return (
     <Container>
@@ -55,10 +40,9 @@ const HomeScreen: React.FC = () => {
       />
 
       <NotesList
-        data={notes}
-        keyExtractor={item => item.id}
-        renderItem={renderNotesListItem}
-        testID="notes-list"
+        notes={notesFilteredByTitle}
+        onPressNote={navigateToEditNote}
+        onDeleteNote={deleteNote}
       />
 
       <AddButton

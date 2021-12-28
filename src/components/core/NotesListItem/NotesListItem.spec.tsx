@@ -17,7 +17,7 @@ jest.mock('@/utils', () => {
   }
 })
 
-describe('HomeScreen', () => {
+describe('NotesListItem', () => {
   it('should renders correctly', () => {
     const formatDateMocked = mocked(formatDate)
 
