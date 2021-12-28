@@ -1,52 +1,34 @@
 import { StackActions } from '@react-navigation/native'
-import { useToast } from 'native-base'
 import React, { useState } from 'react'
-import { v4 as uuidv4 } from 'uuid'
 
+import { useNotes } from '@/contexts'
+import { Toast } from '@/helpers'
 import { useNavigation } from '@/routes'
-import { useDispatch } from '@/stores'
-import { noteAdded } from '@/stores/notes'
 import { Container, TitleInput, ContentInput, SaveButton } from './styles'
 
 export interface AddNoteScreenProps {}
 
 const AddNoteScreen: React.FC<AddNoteScreenProps> = () => {
-  const toast = useToast()
-  const dispatch = useDispatch()
   const navigation = useNavigation()
+
+  const { addNote } = useNotes()
 
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
 
   const handleAddNote = () => {
-    if (title.trim().length === 0) {
-      toast.show({
-        title: 'Sua nota precisa de um título!',
-        placement: 'bottom',
-        status: 'error',
-      })
+    try {
+      const noteId = addNote(title, content)
 
-      return
+      Toast.success('Nota adicionada com sucesso!')
+
+      navigation.dispatch(StackActions.replace('EditNoteScreen', { noteId }))
+    } catch (err: any) {
+      const errorMessage =
+        err?.message || 'Algo de errado aconteceu, tente novamente.'
+
+      Toast.error(errorMessage)
     }
-
-    const id = uuidv4()
-
-    dispatch(
-      noteAdded({
-        id,
-        title,
-        content,
-        date: new Date().toISOString(),
-      }),
-    )
-
-    toast.show({
-      title: 'Nota adicionada com sucesso!',
-      placement: 'bottom',
-      status: 'success',
-    })
-
-    navigation.dispatch(StackActions.replace('EditNoteScreen', { noteId: id }))
   }
 
   return (
