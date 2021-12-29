@@ -1,31 +1,41 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect, useRef, useImperativeHandle } from 'react'
 import { TextInput } from 'react-native'
 
-import { InputProps } from '@/components/ui'
 import { Container, MarkdownContainer, Markdown, Input } from './styles'
+import { NoteContentInputRef, NoteContentInputProps } from './types'
 
-export interface NoteContentInputProps extends InputProps {
-  onRef: (ref: TextInput) => void
-  onEditing: (isEditing: boolean) => void
-}
-
-const NoteContentInput: React.FC<NoteContentInputProps> = ({
-  onRef,
-  onEditing,
-  testID,
-  ...props
-}) => {
+const NoteContentInput: React.ForwardRefRenderFunction<
+  NoteContentInputRef,
+  NoteContentInputProps
+> = ({ onEditing, testID, ...props }, ref) => {
+  const inputRef = useRef() as React.MutableRefObject<TextInput>
   const [isEditing, setIsEditing] = useState(false)
 
   const showMarkdown = () => setIsEditing(false)
   const hideMarkdown = () => setIsEditing(true)
 
+  const focusInput = () => {
+    hideMarkdown()
+    inputRef?.current?.focus()
+  }
+
+  const blurInput = () => {
+    showMarkdown()
+    inputRef?.current?.blur()
+  }
+
   useEffect(() => {
-    onEditing(isEditing)
+    onEditing?.(isEditing)
   }, [isEditing])
 
+  useImperativeHandle(ref, () => ({
+    focus: focusInput,
+    blur: blurInput,
+    isFocused: () => inputRef?.current?.isFocused(),
+  }))
+
   return (
-    <Container onPress={hideMarkdown}>
+    <Container onPress={focusInput} testID={`${testID}-container`}>
       <MarkdownContainer
         contentInsetAdjustmentBehavior="automatic"
         showsVerticalScrollIndicator={false}
@@ -33,13 +43,13 @@ const NoteContentInput: React.FC<NoteContentInputProps> = ({
         testID={`${testID}-markdown-container`}>
         <Markdown
           text={props.value ?? ''}
-          onPress={hideMarkdown}
+          onPress={focusInput}
           testID={`${testID}-markdown`}
         />
       </MarkdownContainer>
 
       <Input
-        ref={onRef}
+        ref={inputRef}
         textAlignVertical="top"
         onFocus={hideMarkdown}
         onBlur={showMarkdown}
@@ -52,4 +62,4 @@ const NoteContentInput: React.FC<NoteContentInputProps> = ({
   )
 }
 
-export default NoteContentInput
+export default React.forwardRef(NoteContentInput)

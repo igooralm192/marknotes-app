@@ -2,6 +2,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import React, { useState, useRef } from 'react'
 import { TextInput } from 'react-native'
 
+import { NoteContentInputRef } from '@/components/core'
 import { useNotes } from '@/contexts'
 import { Toast } from '@/helpers'
 import { useNavigation } from '@/routes'
@@ -32,7 +33,8 @@ const EditNoteScreen: React.FC<EditNoteScreenProps> = ({ route }) => {
   const [content, setContent] = useState(note?.content ?? '')
 
   const titleInputRef = useRef() as React.MutableRefObject<TextInput>
-  const contentInputRef = useRef() as React.MutableRefObject<TextInput>
+  const contentInputRef =
+    useRef() as React.MutableRefObject<NoteContentInputRef>
 
   const handleSaveNote = () => {
     try {
@@ -58,12 +60,6 @@ const EditNoteScreen: React.FC<EditNoteScreenProps> = ({ route }) => {
     navigation.goBack()
   }
 
-  const handleEditing = (isEditing: boolean) => {
-    if (isEditing) {
-      contentInputRef?.current?.focus()
-    }
-  }
-
   return (
     <Container keyboardVerticalOffset={-200} behavior="padding">
       <TitleInput
@@ -78,11 +74,10 @@ const EditNoteScreen: React.FC<EditNoteScreenProps> = ({ route }) => {
       <DateText>{formatDate(note?.date)}</DateText>
 
       <ContentInput
+        ref={contentInputRef}
         placeholder="Digite alguma coisa..."
         value={content}
         onChangeText={setContent}
-        onEditing={handleEditing}
-        onRef={ref => (contentInputRef.current = ref)}
         testID="edit-note-content"
       />
 
