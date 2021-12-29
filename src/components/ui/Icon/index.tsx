@@ -5,6 +5,7 @@ import { SvgProps } from 'react-native-svg'
 import CloseIconSVG from '@/assets/svgs/icon-close.svg'
 import PlusIconSVG from '@/assets/svgs/icon-plus.svg'
 import SaveIconSVG from '@/assets/svgs/icon-save.svg'
+import SearchIconSVG from '@/assets/svgs/icon-search.svg'
 import TrashIconSVG from '@/assets/svgs/icon-trash.svg'
 
 import { defaultColors } from '@/themes'
@@ -15,6 +16,7 @@ const iconSVGMap: Record<IconName, React.FC<SvgProps>> = {
   close: CloseIconSVG,
   plus: PlusIconSVG,
   save: SaveIconSVG,
+  search: SearchIconSVG,
   trash: TrashIconSVG,
 }
 
