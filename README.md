@@ -21,7 +21,7 @@
 <!-- Project Design -->
 
 <p align="center">
-	<img alt="EditNote" width="200px" src=".github/App.gif" />
+	<img alt="App" align="center" width="400px" src=".github/App.gif" />
 <p>
 
 <!-- Summary -->
@@ -75,6 +75,7 @@ This application uses the following technologies:
 ## :fire: What's next
 
 - [ ] Help buttons for markdown text
+- [ ] Grid of notes on Home
 
 ---
 
