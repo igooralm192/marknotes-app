@@ -21,7 +21,7 @@ describe('NotesListItem', () => {
   it('should renders correctly', () => {
     const formatDateMocked = mocked(formatDate)
 
-    formatDateMocked.mockImplementationOnce(s => s)
+    formatDateMocked.mockImplementationOnce(s => s ?? '')
 
     const screen = render(
       <NotesListItem {...note} onDeleteNote={onDeleteNoteMock} />,
