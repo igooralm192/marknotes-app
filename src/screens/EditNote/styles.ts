@@ -1,27 +1,8 @@
-import {
-  IScrollViewProps,
-  KeyboardAvoidingView,
-  Pressable,
-  ScrollView,
-} from 'native-base'
-import React from 'react'
-import { TextInput } from 'react-native'
+import { KeyboardAvoidingView } from 'native-base'
 import styled from 'styled-components/native'
 
 import * as Ui from '@/components/ui'
-import * as Lib from '@/components/lib'
-
-type IsEditingProps = {
-  isEditing?: boolean
-}
-
-type Input = React.ForwardRefExoticComponent<
-  Ui.InputProps & React.RefAttributes<TextInput> & IsEditingProps
->
-
-type ScrollView = React.ForwardRefExoticComponent<
-  IScrollViewProps & React.RefAttributes<unknown> & IsEditingProps
->
+import * as Core from '@/components/core'
 
 export const Container = styled(KeyboardAvoidingView).attrs({
   px: 6,
@@ -47,30 +28,7 @@ export const DateText = styled(Ui.Typography).attrs({
   color: 'grey.500',
 })``
 
-export const ContentContainer = styled(Pressable).attrs({
-  mt: 4,
-  flex: 1,
-})``
-
-export const MarkdownContentContainer = styled<ScrollView>(ScrollView).attrs(
-  ({ isEditing }) => {
-    return {
-      display: !isEditing ? 'flex' : 'none',
-    }
-  },
-)``
-
-export const MarkdownContent = styled(Lib.MarkdownDisplay)``
-
-export const ContentInput = styled<Input>(EditNoteInput).attrs(
-  ({ isEditing }) => {
-    return {
-      fontSize: 'lg',
-      fontWeight: 500,
-      display: isEditing ? 'flex' : 'none',
-    }
-  },
-)``
+export const ContentInput = styled(Core.NoteContentInput)``
 
 export const SaveButton = styled(Ui.FAB).attrs({
   colorScheme: 'success',

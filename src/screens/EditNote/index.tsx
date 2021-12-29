@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { TextInput } from 'react-native'
 
 import { useNotes } from '@/contexts'
@@ -12,9 +12,6 @@ import {
   Container,
   TitleInput,
   DateText,
-  ContentContainer,
-  MarkdownContentContainer,
-  MarkdownContent,
   ContentInput,
   SaveButton,
   DeleteButton,
@@ -27,6 +24,7 @@ const EditNoteScreen: React.FC<EditNoteScreenProps> = ({ route }) => {
   const { noteId } = route.params
 
   const navigation = useNavigation()
+
   const { notesById, editNote, deleteNote } = useNotes()
   const note = notesById[noteId]
 
@@ -36,11 +34,6 @@ const EditNoteScreen: React.FC<EditNoteScreenProps> = ({ route }) => {
   const titleInputRef = useRef() as React.MutableRefObject<TextInput>
   const contentInputRef = useRef() as React.MutableRefObject<TextInput>
 
-  const [isEditing, setIsEditing] = useState(false)
-
-  const showMarkdown = () => setIsEditing(false)
-  const hideMarkdown = () => setIsEditing(true)
-
   const handleSaveNote = () => {
     try {
       editNote(noteId, title, content)
@@ -49,8 +42,11 @@ const EditNoteScreen: React.FC<EditNoteScreenProps> = ({ route }) => {
 
       titleInputRef?.current?.blur()
       contentInputRef?.current?.blur()
-    } catch (err) {
-      Toast.error('Nota removida com sucesso!')
+    } catch (err: any) {
+      const errorMessage =
+        err?.message || 'Algo de errado aconteceu, tente novamente.'
+
+      Toast.error(errorMessage)
     }
   }
 
@@ -62,14 +58,10 @@ const EditNoteScreen: React.FC<EditNoteScreenProps> = ({ route }) => {
     navigation.goBack()
   }
 
-  useEffect(() => {
+  const handleEditing = (isEditing: boolean) => {
     if (isEditing) {
       contentInputRef?.current?.focus()
     }
-  }, [isEditing])
-
-  if (!note) {
-    return null
   }
 
   return (
@@ -79,37 +71,20 @@ const EditNoteScreen: React.FC<EditNoteScreenProps> = ({ route }) => {
         placeholder="Título"
         value={title}
         onChangeText={setTitle}
-        onSubmitEditing={hideMarkdown}
+        onSubmitEditing={() => contentInputRef?.current?.focus()}
         testID="edit-note-title-input"
       />
 
-      <DateText>{formatDate(note.date)}</DateText>
+      <DateText>{formatDate(note?.date)}</DateText>
 
-      <ContentContainer onPress={hideMarkdown}>
-        <MarkdownContentContainer
-          contentInsetAdjustmentBehavior="automatic"
-          showsVerticalScrollIndicator={false}
-          isEditing={isEditing}
-          testID="edit-note-markdown-content-container">
-          <MarkdownContent
-            text={content}
-            onPress={hideMarkdown}
-            testID="edit-note-markdown-content"
-          />
-        </MarkdownContentContainer>
-
-        <ContentInput
-          ref={contentInputRef}
-          placeholder="Digite alguma coisa..."
-          textAlignVertical="top"
-          value={content}
-          onChangeText={setContent}
-          onBlur={showMarkdown}
-          isEditing={isEditing}
-          testID="edit-note-content-input"
-          multiline
-        />
-      </ContentContainer>
+      <ContentInput
+        placeholder="Digite alguma coisa..."
+        value={content}
+        onChangeText={setContent}
+        onEditing={handleEditing}
+        onRef={ref => (contentInputRef.current = ref)}
+        testID="edit-note-content"
+      />
 
       <DeleteButton
         icon="trash"

@@ -47,20 +47,20 @@ describe('EditNoteScreen', () => {
 
     const titleInput = await screen.findByTestId('edit-note-title-input')
     const contentInput = await screen.findByTestId('edit-note-content-input')
-    const markdownContentContainer = await screen.findByTestId(
-      'edit-note-markdown-content-container',
+    const contentMarkdownContainer = await screen.findByTestId(
+      'edit-note-content-markdown-container',
     )
-    const markdownContent = await screen.findByTestId(
-      'edit-note-markdown-content',
+    const contentMarkdown = await screen.findByTestId(
+      'edit-note-content-markdown',
     )
 
     expect(contentInput).toHaveStyle({ display: 'none' })
-    expect(markdownContentContainer).toHaveStyle({ display: 'flex' })
+    expect(contentMarkdownContainer).toHaveStyle({ display: 'flex' })
 
-    fireEvent.press(markdownContent)
+    fireEvent.press(contentMarkdown)
 
     expect(contentInput).toHaveStyle({ display: 'flex' })
-    expect(markdownContentContainer).toHaveStyle({ display: 'none' })
+    expect(contentMarkdownContainer).toHaveStyle({ display: 'none' })
 
     const otherTitle = faker.random.words()
     const otherContent = faker.random.words()
@@ -84,7 +84,7 @@ describe('EditNoteScreen', () => {
     expect(screen.queryByText('Nota atualizada com sucesso!')).toBeTruthy()
 
     expect(contentInput).toHaveStyle({ display: 'none' })
-    expect(markdownContentContainer).toHaveStyle({ display: 'flex' })
+    expect(contentMarkdownContainer).toHaveStyle({ display: 'flex' })
   })
 
   it('should remove note, show message and back to previous screen', async () => {
