@@ -1,7 +1,12 @@
 {
-  "name": "projectname",
-  "version": "0.0.1",
-  "private": true,
+  "name": "marknotes",
+  "version": "1.0.0",
+  "author": {
+    "name": "igooralm192"
+  },
+  "repository": {
+    "url": "https://github.com/igooralm192/marknotes-app"
+  },
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
